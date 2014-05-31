@@ -1,6 +1,6 @@
 = Development :: development
 
-このページでは KARAS の開発者向けの情報を掲載しています。KARAS をあなたのシステムに導入するときは、((./System requirements.html :: System Requirements)) のページを読んでください。プラグインを開発するときは、((./Plugin.html :: Plugin)) のページを読んでください。新しい言語を開発するとき、構文の修正や追加を考えているとき、KARAS の設計根拠を知りたいときは、((./Concept and rationale/index.html :: Concept & Rational)) のページを読んでください。
+このページでは KARAS の開発者向けの情報を掲載しています。KARAS をあなたのシステムに導入するときは、((./systemrequirements.html :: System Requirements)) のページを読んでください。プラグインを開発するときは、((./plugin.html :: Plugin)) のページを読んでください。新しい言語を開発するとき、構文の修正や追加を考えているとき、KARAS の設計根拠を知りたいときは、((./conceptandrationale/index.html :: Concept & Rational)) のページを読んでください。
 
 
 

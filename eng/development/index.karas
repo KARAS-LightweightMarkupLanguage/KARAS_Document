@@ -1,6 +1,6 @@
 = Development :: development
 
-These pages provide information for KARAS developers. When implementing KARAS to your system, please read ((./System requirements.html :: System Requirements)). When developing a plugin of KARAS, please read ((./Plugin.html :: Plugin)) page. When developing a new language, want to modify or add syntax, or want to know rationale of the design of KARAS, read ((./Concept and rationale/index.html :: Concept & Rational)) page.
+These pages provide information for KARAS developers. When implementing KARAS to your system, please read ((./systemrequirements.html :: System Requirements)). When developing a plugin of KARAS, please read ((./plugin.html :: Plugin)) page. When developing a new language, want to modify or add syntax, or want to know rationale of the design of KARAS, read ((./conceptandrationale/index.html :: Concept & Rational)) page.
 
 
 
