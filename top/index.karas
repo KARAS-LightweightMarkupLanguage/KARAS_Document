@@ -1,0 +1,24 @@
+
+<table>
+<tr>
+<td>
+
+(((./resource/logo.png)))
+
+</td>
+<td>
+
+= KARAS
+= Lightweight Markup Language
+
+</td>
+</tr>
+</table>
+
+KARAS is a next generation lightweight markup language.~
+The syntax is quite simple and beautiful.
+
+{{nav
+- ((./eng/index.html :: English))
+- ((./jpn/index.html :: Japanese))
+}}

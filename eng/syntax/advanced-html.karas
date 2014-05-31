@@ -1,0 +1,324 @@
+= Advanced - HTML :: advancedhtml
+
+Text written in KARAS can include HTML. In many cases, KARAS outputs the appropriate result, but if the result is different from that you think, you can write HTML directly. This page describe rules about HTML.
+
+{{note
+In few system, because of the security or output format, you may not able to insert HTML.
+}}
+
+[[[toc::2]]]
+
+
+
+
+
+== Easiest Sample :: easiestsample
+
+For example, you can write HTML like this.
+
+{{figure
+= Input
+{{code :: karas
+This is <mark>sample</mark> text.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This is <mark>sample</mark> text.</p>
+}}
+}}
+
+Like a following sample, you can write HTML in KARAS syntax, and also can write KARAS in HTML.
+
+{{figure
+= Input
+{{code :: karas
+= This is <mark>heading</mark> sample.
+
+This is <mark>// sample //</mark> text.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<h1>This is <mark>heading</mark>sample.</h1>
+
+<p>This is <mark><i>sample</i></mark> text.</p>
+}}
+}}
+
+
+
+
+
+== Text beginning with &lt; :: beginltmark
+
+Text beginning with single ```<``` is regarded as HTML text. HTML text does not become a paragraph. Note, even if the text beginning with single ```<``` is not HTML tag, it does not become a paragraph. Usually, &lt; and &gt; mark is written in //Character Reference// like ```&lt;``` and ```&gt;```.
+
+For example, when you write a text beginning with //mark// element, it does not become a paragraph.
+
+{{figure
+= Input
+{{code :: karas
+<mark>This</mark> sample text has wrong.
+
+<This sample text has wrong.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<mark>This</mark> sample text has wrong.
+
+<This sample text has wrong.
+}}
+}}
+
+Text following after the //mark// element is not closed with HTML element, so this output result(HTML) has wrong structure.
+
+In order to solve this problem, to write a ```\\``` to escape, or, to write a correct HTML element directly. In here, //p// element.
+
+{{figure
+= Input
+{{code :: karas
+\<mark>This</mark> sample text is correct.
+
+<p><mark>This</mark> sample text is correct.</p>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p><mark>This</mark> sample text is correct.</p>
+ 
+<p><mark>This</mark> sample text is correct.</p>
+}}
+}}
+
+*** Note, KARAS syntax in the text which beginning with single ```<``` is not converted. *** For example, like a sample, KARAS syntax is not converted and outputted directly. In here, sample shows case of //p// element, but the //h1// or //div// element are also not converted.
+
+{{figure
+= Input
+{{code :: karas
+<p>This is <mark>// sample //</mark> text.</p>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This is <mark>// sample //</mark> text.</p>
+}}
+}}
+
+In KARAS, paragraph is separated with blank line or other KARAS syntax. The 2nd line in the next sample is beginning with ```<```, the text becomes a paragraph. Because the 1st line of the text is start position of the paragraph.
+
+{{figure
+= Input
+{{code :: karas
+This text become a paragraph.
+<mark>This</mark> line included in paragraph.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This text become a paragraph.
+<mark>This</mark> line included in paragraph.</p>
+}}
+}}
+
+Inline group syntax using ```<<``` is not regarded as HTML, and converted. Text in following sample becomes a paragraph.
+
+{{figure
+= Input
+{{code :: karas
+<<sample::This>> text become a paragraph.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p><span class="sample">This</span> text become a paragraph.</p>
+}}
+}}
+
+
+
+
+
+== Blank line in HTML :: blanklineinhtml
+
+Be careful when the blank line is included in HTML. KARAS divide a text with blank line. For example, when you write a text like a following sample, the output result has wrong structure.
+
+{{figure
+= Input
+{{code :: karas
+<p>This HTML is written by User.
+
+This line is enclosed with blank-line.
+
+</p>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This HTML is written by User. 
+<p>This line is enclosed with blank-line.</p> 
+</p>
+}}
+}}
+
+Because there is a text beginning with blank line, KARAS convert the text to //p// element. In HTML, //p// element can not include other //p// element. So this result has wrong structure. This problem is not only to //p// element. All of HTML element which can not include //p// element has this problem.
+
+
+On the other hand, by using this rule, it is able to put KARAS syntax and the //p// element into HTML. For example, text in following sample becomes a correct result.
+
+{{figure
+= Input
+{{code :: karas
+<div id="sample">
+
+This line is enclosed with blank-line.
+
+</div>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<div id="sample">
+<p>This line is enclosed with blank-line.</p> 
+</div>
+}}
+}}
+
+
+
+
+
+== Wrong Usage :: wornguse
+
+When using combination of KARAS and HTML, be careful with wrong usage like following case. When you write a HTML, it is important to have correct knowledge about HTML.
+
+
+
+
+
+=== Case - 1 :: worngsamplea
+
+Because of the HTML text in KARAS document, outputted HTML may gets wrong structure. For example, following text has wrong.
+
+{{figure
+= Input
+{{code :: karas
+= <h1>Heading text</h1>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<h1><h1>Heading</h1></h1>
+}}
+}}
+
+In HTML, //h1-6// element can not include //h1-6// element. Therefore, this HTML has wrong structure.
+
+
+
+
+=== Case - 2 :: wrongsampleb
+
+KARAS regards continuous text as one block. Sometimes HTML elements are included in the block.
+
+Therefore, for example, be careful to not include HTML element which can not be included in //p// element into //p// element (paragraph). Following text has wrong structure. //p// element (paragraph) can not include //ul// element.
+
+{{figure
+= Input
+{{code :: karas
+This text become a paragraph.
+<ul>
+<li>This HTML element is written a user.</li>
+</ul>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This text become a paragraph.
+<ul>
+<li>This HTML element is written a user.</li>
+</ul></p>
+}}
+}}
+
+To solve this problem, insert blank line before the //ul// element.
+
+{{figure
+= Input
+{{code :: karas
+This text become a paragraph.
+
+<ul>
+<li>This HTML element is written a user.</li>
+</ul>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This text become a paragraph.</p>
+<ul>
+<li>This HTML element is written a user.</li>
+</ul>
+}}
+}}
+
+
+
+
+
+=== Case - 3 :: wrongsamplec
+
+There are also some pattern that can not be combined with HTML and KARAS syntax. For example, when you write a list, like a following sample. It looks like 2 li elements are included in ul element, but the output result is not to be so.
+
+{{figure
+= Input
+{{code :: karas
+- KARAS list
+<li> HTML list </li>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<ul>
+<li>KARAS list
+<li> HTML list </li></li>
+</ul>
+}}
+}}
+
+In here, sample shows //ul// and //li// case, but this is same in case of table or the other.
+
+
+
+
+
+== &lt; and &gt; mark in //pre//, //code//, //samp// element :: ltgtinprecodesamp
+
+KARAS has group syntax to output //pre//, //code//, and //samp// element. &lt; and &gt; marks in these group are converted to character reference. However, *** when //pre//, //code//, and //samp// element is written in HTML directly, &lt; and &gt; marks in these element is not converted. And the KARAS syntax in these element is also not converted. ***

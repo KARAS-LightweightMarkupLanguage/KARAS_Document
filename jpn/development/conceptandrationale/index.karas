@@ -1,0 +1,15 @@
+= Concept & Rationale :: cncptrationale
+
+このページでは KARAS の設計に関する根拠やコンセプトを解説しています。特に、KARAS の派生形や新しい軽量マークアップ言語を開発するときには、事前に読むことを推奨します。
+
+
+
+
+
+== Pages :: pages
+
+- ((./philosophy.html :: Philosophy))
+- ((./baseconcept.html :: Base concept))
+- ((./syntaxdesign.html :: Sytanx design))
+- ((./regardinghtml.html :: Regarding HTML))
+- ((./unsupportedfeatures.html :: Unsupported features))

@@ -1,0 +1,56 @@
+= Information :: authorandlicense
+
+== News :: news
+
+==== Release KARAS α ver. :: releasealpha
+
+- 2014.05.31 : Web ページを大幅に更新しました。
+- 2014.05.03 : KARAS の α ver. をリリースしました。
+
+
+
+
+
+== Future work :: futurework
+
+次の内容を、将来的に対応するかもしれません。 可能性は低いと思いますが、 KARAS によって十分な収益が得られるのであれば、直ぐに対応することになります。
+
+
+
+
+
+==== GitHub
+
+これまで GitHub を利用したことがないので、リポジトリの作り方などを変更する可能性があります。
+
+
+
+
+
+==== Jekyll &amp; Wordpress plugin :: plugins
+
+必要であれば Jekyll と WordPress のプラグインを公式のフォーラム等で公開することは考えていますが時期は未定です。2重3重に管理するコストを考えると、必要以上に公開の場を拡大する必要もないと考えています。
+
+
+
+
+
+==== Static HTML Compiler :: htmlcompiler
+
+この KARAS のページは、 KARAS - Ruby ver. を利用した静的 HTML コンパイラを用いて生成されています。 KARAS を利用したサンプルを示すため、このアプリケーションのソースコードを公開する予定でいます。
+
+
+
+
+
+==== EPUB :: epub
+
+EPUB を出力するための何らかの仕組みを提供する可能性があります。
+
+
+
+
+
+==== Java &amp; Python ver. :: otherversion
+
+Java ver. と Python ver. の開発を開始する可能性があります。 その場合、恐らく Java の開発が先になります。今のところ、これ以外の言語へ対応する予定はありません。 C かあるいは C++ に対応するかもしれませんが、約束はできません。

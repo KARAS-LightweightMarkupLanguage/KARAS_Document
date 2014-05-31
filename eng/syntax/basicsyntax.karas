@@ -1,0 +1,910 @@
+= Basic Syntax :: basicsyntax
+
+This page describe the basic syntax of KARAS.
+
+[[[toc::2]]]
+
+
+
+
+
+== About //Level// :: aboutlevel
+
+KARAS has a concept called **??Level??**. For example, in KARAS, you can output the heading elements ```<h1>``` with write a ```=``` mark at the beginning of a line. And when you write two marks like ```==```, it outputs ```<h2>```. In KARAS, units of output result change is defined as //Level//.
+
+
+
+
+
+== Heading and Hr :: headinghr
+
+**When write a ```=``` at the beginning of the line, it outputs heading.** The maximum level is 6. Output level of heading is decreased when the syntax level is up. Text written after the ```::``` becomes //ID//.
+
+{{figure
+= Input
+{{code :: karas
+= Heading level 1
+== Heading level 2 :: ID
+=== Heading level 3
+==== Heading level 4
+===== Heading level 5
+====== Heading level 6
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<h1>Heading level 1</h1>
+<h2 id="ID">Heading level 2</h2>
+<h3>Heading level 3</h3>
+<h4>Heading level 4</h4>
+<h5>Heading level 5</h5>
+<h6>Heading level 6</h6>
+}}
+}}
+
+**When write seven or more ```=``` at the beginning of the line, it outputs horizontal line.** Levels above 7, it always outputs a horizontal line. Then, text written after ```=``` is not output.
+
+{{figure
+= Input
+{{code :: karas
+=======
+======== 8
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<hr>
+<hr>
+}}
+}}
+
+
+
+
+
+== List :: list
+
+
+
+
+
+=== Unordered List:: unorderedlist
+
+**When write a ```-``` at the beginning of the line, it outputs unordered list.** The maximum level is undefined. Output list is nested when the syntax level is up.
+
+{{figure
+= Input
+{{code :: karas
+- Item 1
+- Item 2
+-- Item 2-1
+- Item 3
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<ul>
+    <li>Item 1</li>
+    <li>Item 2
+        <ul>
+            <li>Item 2-1</li>
+        </ul>
+    </li>
+    <li>Item 3</li>
+</ul>
+}}
+}}
+
+
+
+
+
+=== Ordered List :: orderedlist
+
+**When write a ```+``` at the beginning of the line, it outputs ordered list.** The maximum level is undefined. Output list is nested when the syntax level is up.
+
+{{figure
+= Input
+{{code :: karas
++ Item 1
+++ Item 2
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<ol>
+    <li>Item 1
+        <ol>
+            <li>Item 2</li>
+        </ol>
+    </li>
+</ol>
+}}
+}}
+
+**To change the starting number of the list, write a ```::```.** List which included in the same group as the list that you specify the starting number gets continuous number until it is changed again.
+
+{{figure
+= Input
+{{code :: karas
++ Item 1
+++ Item 1-5 :: 5
+++ Item 1-6
++ Item 2
+++ Item 2-1
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+ <ol>
+    <li>Item 1
+        <ol>
+            <li value="5">Item 1-5</li>
+            <li>Item 1-6</li>
+        </ol>
+    </li>
+    <li>Item 2
+        <ol>
+            <li>Item 2-1</li>
+        </ol>
+    </li>
+ </ol>
+}}
+}}
+
+
+
+
+
+=== Definition List :: deflist
+
+**When write a ```;``` at the beginning of the line, it outputs definition list.** The maximum level is 2. In level 1, outputs definition term. And in level 2, outputs definition description. You can add any number of definition term and the description.
+
+{{figure
+= Input
+{{code :: karas
+; Definition term
+;; Definition description 1
+;; Definition description 2
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<dl>
+    <dt>Definition term</dt>
+    <dd>Definition description 1</dd>
+    <dd>Definition description 2</dd>
+</dl>
+}}
+}}
+
+
+
+
+
+== Decoration and Meaning :: decandmean
+
+
+
+
+
+=== Bold and Strong :: boldstrong
+
+**Text closed with ```\*\*``` becomes bold text.** The maximum level is 2. In level 1, text becomes bold text. In level 2, text gets a strong importance.
+
+{{figure
+= Input
+{{code :: karas
+** Bold text **
+*** Strong text ***
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<b>Bold text</b>
+<strong>Strong text</strong>
+}}
+}}
+
+
+
+
+
+=== Italic and Emphasize :: italicemphasize
+
+**Text closed with  ```\/\/``` becomes italic text. The maximum level is 2. In level 1, text becomes italic text. In level 2, text gets a stress emphasis.
+
+{{figure
+= Input
+{{code :: karas
+// Italic text //
+/// Emphasized text ///
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<i>Italic text</i>
+<em>Emphasized text</em>
+}}
+}}
+
+However, ***text which included in protocol like http:// or ftp:// is ignored.***
+
+
+
+
+
+=== Underline and Insert :: underlineins
+
+**Text closed with  ```\_\_``` is outputted with underline.** The maximum level is 2. In level 1, text is decorated with underline. In level 2, text becomes inserted text.
+
+{{figure
+= Input
+{{code :: karas
+__ Underline text __
+___ Inserted text ___
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<u>Underline text</u>
+<ins>Inserted text</ins>
+}}
+}}
+
+
+
+
+
+=== Strikeout and Delete :: strikedel
+
+**Text closed with  ```\%\%``` becomes strikeout text.** The maximum level is 2. In level 1, text is decorated with strikeout-line. In level 2, text becomes deleted text.
+
+{{figure
+= Input
+{{code :: karas
+%% Striked text %%
+%%% Deleted text %%%
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<s>Striked text</s>
+<del>Deleted text</del>
+}}
+}}
+
+
+
+
+
+=== Defitnition Term:: defabbr
+
+**Text closed with  ```\?\?``` becomes definition term.** The maximum level is 2. In level 1, text becomes definition term. In level 2, text becomes abbreviated definition term.
+
+{{figure
+= Input
+{{code :: karas
+?? Definition text ??
+??? Abbreviated definition text ???
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<dfn>Definition text</dfn>
+<dfn><abbr>Abbreviated definition text</abbr><dfn>
+}}
+}}
+
+
+
+
+
+=== Input(kbd) and Output(samp) :: kbdsamp
+
+**Text closed with  ```\$\$``` indicate user input or output.** The maximum level is 2. In level 1, text indicate user input. In level 2, text indicate output. &lt; and &gt; marks included in marked up text whith this syntax are converted to //character reference//.
+
+{{figure
+= Input
+{{code :: karas
+$$ < Keyboard text > $$
+$$$ > Sample text $$$
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<kbd>&lt; Keyboard text &gt;</kbd>
+<samp>&gt; Sample text</samp>
+}}
+}}
+
+
+
+
+
+=== Variable and Code :: varcode
+
+**Text closed with  ```\`\```` indicate variable or code.** The maximum level is 2. In level 1, text indicate variable. In level 2, text indicate code. &lt; and &gt; marks included in marked up text whith this syntax are converted to //character reference//.
+
+{{figure
+= Input
+{{code :: karas
+`` <Variable text> ``
+``` > Code text ```
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<var>&lt;Variable text&gt;</var>
+<code>&gt; Code text</code>
+}}
+}}
+
+{{note
+Variable elements (level 1) can use for indicate formula or the other. Code elements (level 2) can use for indicate XML or file path.
+}}
+
+
+
+
+
+=== Superscript and Ruby :: supruby
+
+**Text closed with  ```\'\'``` becomes superscript text.** The maximum level is 2. In level 1, text becomes superscript text. In level 2, text becomes ruby.
+
+{{figure
+= Input
+{{code :: karas
+''Superscript text''
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<sup>Superscript text</sup>
+}}
+}}
+
+To write a ruby-text by using level 2 syntax, split each word and each ruby by option syntax ```::```.
+
+{{figure
+= Input
+{{code :: karas
+'''KANJI::ruby'''
+'''KAN::ru::JI::by'''
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<ruby>KANJI<rp> (</rp><rt>ruby</rt><rp> )</rp></ruby>
+<ruby>KAN<rp> (</rp><rt>ru</rt><rp> )</rp>JI<rp> (</rp><rt>by</rt><rp> )</rp></ruby>
+}}
+}}
+
+
+
+
+
+=== Subscript :: subscript
+
+**Text closed with  ```\,\,``` becomes subscript text.** The maximum level is 1.
+
+{{figure
+= Input
+{{code :: karas
+,, Subscript text ,,
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<sub>Subscript text</sub>
+}}
+}}
+
+
+
+
+
+== Quote and Cite :: quotecite
+
+
+
+
+
+=== Cite :: cite
+
+**Text closed with  ``` \@\@``` indicate title or cite.** The maximum level is 2. In level 1, text indicate title or cite. In level 2, text indicate bylaws (like disclaimer or copyright).
+
+{{figure
+= Input
+{{code :: karas
+@@ Cite text @@
+@@@ features disclaimers, caveats, legal restrictions, or copyrights @@@
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<cite>Cite text</cite>
+<small>features disclaimers, caveats, legal restrictions, or copyrights</small>
+}}
+}}
+
+
+
+
+
+=== Small(inline) Quote :: inlinequote
+
+**Text closed with  ```\"\"``` indicate quoted text.** The maximum level is 1. 
+
+{{figure
+= Input
+{{code :: karas
+"" Quoted text ""
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<q>Quoted text</q>
+}}
+}}
+
+
+
+
+
+=== Large(block) Quote :: blockquote
+
+**When write a ```>``` at the beginning of the line, it outputs blockquote text.** The maximum level is undefined. Output list is nested when the syntax level is up. When your quoted text include line-break, use this syntax.
+
+{{figure
+= Input
+{{code :: karas
+> Blockquote text,
+2nd line.
+>> Blockquote text in Blockquote.
+>>> Blockquote text in Blockquote.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<blockquote>
+<p>Blockquote text,
+ 2nd line.</p>
+    <blockquote>
+    <p>Blockquote text in Blockquote.</p>
+        <blockquote>
+        <p>Blockquote text in Blockquote.</p>
+        </blockquote>
+    </blockquote>
+</blockquote>
+}}
+}}
+
+
+
+
+
+== Link :: link
+
+**Text closed with  ```\(\(``` and ```\)\)``` becomes link (anchor) text.** The maximum level is 2. In level 1, text becomes default link text. In level 2, text becomes embedded media link.
+
+To make a text link(called alias), write the text after the option syntax.
+
+Text after option syntax ``` :: ```  becomes link alias.
+
+{{figure
+= Input
+{{code :: karas
+(( URL ))
+(( ImageURL.jpg ))
+(( URL :: Alias text ))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<a href="URL">URL</a>
+<a href="ImageURL.jpg">ImageURL.jpg</a>
+<a href="URL">Alias text</a>
+}}
+}}
+
+***Output of the level 2 syntax depends on specified URL.*** When the file extension at bottom of the url shows image file, the output result becomes optimized format to show the image.　It is same as audio, or video. When adding the parameter to these media, write the option text after option syntax ```::```.
+
+{{note
+In default converter, text after option syntax ```::``` is added to the result as option with no changes. And, to the nested element such as //obj//, these text are added after converted to the optimized parameter. Option text is splitted and analyzed whether it is reserved or not.
+}}
+
+When the URL shows image file.
+
+{{figure
+= Input
+{{code :: karas
+((( ImageURL.jpg )))
+((( ImageURL.jpg :: alt="white image" width="100" height="100" )))
+}}
+}}
+
+{{figure
+= Outut
+{{code
+<img src="ImageURL.jpg">
+<img src="ImageURL.jpg" alt="white image" width="100" height="100">
+}}
+}}
+
+When the URL shows video file.
+
+{{figure
+= Input
+{{code :: karas
+((( VideoURL.mp4 )))
+((( VideoURL.mp4, width="100" height="100" loop controls )))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<video src="VideoURL.mp4">
+    <object data="VideoURL.mp4">
+        <embed src="VideoURL.mp4">
+    </object>
+</video>
+<video src="VideoURL.mp4" width="100" height="100" controls>
+    <object data="VideoURL.mp4" width="100" height="100">
+        <param name="controls" value="true">
+        <embed src="VideoURL.mp4" width="100" height="100" controls="true">
+    </object>
+</video>
+}}
+}}
+
+When the URL shows audio file.
+
+{{figure
+= Input
+{{code :: karas
+((( AudioURL.mp3 )))
+((( AudioURL.mp3 :: loop )))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<audio src="AudioURL.mp3">
+    <object data="AudioURL.mp3">
+        <embed src="AudioURL.mp3">
+    </object>
+</audio>
+<audio src="AudioURL.mp3" loop>
+    <object data="AudioURL.mp3">
+        <param name="loop" value="true">
+        <embed src="AudioURL.mp3" loop="true">
+    </object>
+</audio>
+}}
+}}
+
+When the URL shows other type file. For example, FLASH (.swf) is one of sample.
+
+{{figure
+= Input
+{{code :: karas
+(((UndefURL.swf)))
+(((UndefURL.swf :: width="100" height="100" allowfullscreen)))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<object data="UndefURL.swf">
+    <embed src="UndefURL.swf">
+</object>
+<object data="UndefURL.swf" width="100" height="100">
+    <param name="allowfullscreen" value="true">
+    <embed src="UndefURL.swf" width="100" height="100" allowfullscreen="true">
+</object>
+}}
+}}
+
+{{note
+Output format is depends on the system which introduce KARAS. This page shows the result of when using default onverter. If you need the exact information, please refer to the example of the conversion result provided by the system. Developers have to develop the system which is able to output the optimized result for the media, when using syntax level 2.
+}}
+
+
+
+
+
+== Table :: table
+
+**When write a ```||``` at the beginning of the line, it outputs table.** To output the next cell, write a ```||``` in the same line. Table row is controlled with line-break.
+
+There is no need to align the ``` || ``` or space. However, When there are much cells, or number of the characters in each cells have much difference, you should align them to save the readability.
+
+{{figure
+= Input
+{{code :: karas
+|| Cell 1 || Cell 2
+|| Cell 3 || Cell 4
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<table>
+    <tr><td>Cell 1</td><td>Cell 2</td></tr>
+    <tr><td>Cell 3</td><td>Cell 4</td></tr>
+</table>
+}}
+}}
+
+To output header, change the left mark of the cell syntax like this ```!|```. 
+
+{{figure
+= Input
+{{code :: karas
+!| Cell 1 !| Cell 2
+|| Cell 3 || Cell 4
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<table>
+    <tr><th>Cell 1</th><th>Cell 2</th></tr>
+    <tr><td>Cell 3</td><td>Cell 4</td></tr>
+</table>
+}}
+}}
+
+To output left-aligned cell, change the right mark of the cell syntax like this ``` |< ```. To output right-aligned cell, like this ``` |> ```. To output center-aligned cell, like this ``` |= ```. And to output right-aligned header cell, like this ``` !> ```.
+
+{{note
+Default align of cell might be changed in your system or layout function like CSS.
+}}
+
+{{figure
+= Input
+{{code :: karas
+!| Cell 1 !> Cell 2
+|< Cell 3 |= Cell 4
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<table>
+    <tr>
+        <th>Cell 1</th>
+        <th style="text-align:right;">Cell 2</td>
+    </tr>
+    <tr>
+        <td style="text-align:left;">Cell 3</td>
+        <td style="text-align:center;">Cell 4</td>
+    </tr>
+</table>
+}}
+}}
+
+To merge cells in a row, write only ```::``` in the cell. Cell which has ```::``` is merged to the left side cell. To merge cells in a column, write only ```:::``` in the cell. Cell which has ```:::``` is merged to the upper cell.
+
+{{figure
+= Input
+{{code :: karas
+|| Cell 1 ||  ::    || Cell 2 || Cell 3
+|| Cell 4 || Cell 5 ||  :::   || Cell 6
+||  :::   || Cell 7 ||  :::   || Cell 8
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<table>
+    <tr>
+        <td colspan="2">Cell 1</td>
+        <td rowspan="3">Cell 2</td>
+        <td>Cell 3</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Cell 4</td>
+        <td>Cell 5</td>
+        <td>Cell 6</td>
+    </tr>
+    <tr>
+        <td>Cell 7</td>
+        <td>Cell 8</td>
+    </tr>
+</table>
+}}
+}}
+
+
+
+
+
+== Others :: others
+
+
+
+
+
+=== // &lt; // and // &gt; // marks :: ltgtmark
+
+In order to write &lt; or &gt; mark as non-syntax, you have to write the character reference like ``` &lt; ``` or ``` &gt; ```.
+
+
+
+
+
+=== Paragraph :: paragraph
+
+When the text has no special mark at the beginning of the line,　it becomes a paragraph. Special marks are ```= + - ; < >``` and some combination ``` \(\( \|\| |> |< |= !| !> !< != ```. 
+
+{{figure
+= Input
+{{code :: karas
+This text become a paragraph. 
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This text become a paragraph. </p>
+}}
+}}
+
+Text becomes a one paragraph even if it has line-break. If there is some blank-line between texts, it becomes each paragraph.
+
+{{figure
+= Input
+{{code :: karas
+This text become a paragraph.
+2nd line.
+ 
+Paragraph is divided by blank line.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This text become a paragraph.
+2nd line.</p>
+<p>Paragraph is divided by blank line.</p>
+}}
+}}
+
+When need a line-break in a paragraph, write a ``` ~ ``` before line-break. In order to write a blank-line in a paragraph, write only ```~``` in the line.
+
+{{figure
+= Input
+{{code :: karas
+This text become a paragraph. ~
+2nd line.
+
+This text become a paragraph.~
+~ 
+2nd line.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p> This text become a paragraph.<br> 
+2nd line.</p>
+ 
+<p>This text become a paragraph.<br>
+<br>
+2nd line.</p>
+}}
+}}
+
+
+
+
+
+=== Commentout :: commentout
+
+**Text closed with  ```\#\#``` is not outputted. ** The maximum level is 1. 
+
+{{figure
+= Input
+{{code :: karas
+## Comment out text ##
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+Nothing is output.
+}}
+}}
+
+
+
+
+
+=== Escape :: escape
+
+Syntax of KARAS is able to invalidate by using escape mark ```\\```. For example, when you want to write a paragraph which start with ``` = ```, write ```\\=```.
+
+{{figure
+= Input
+{{code :: karas
+\= This text become a paragraph.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>= This text become a paragraph.</p>
+}}
+}}
+
+Escape syntax ignores only one mark. And to write a escape mark ```\\```, write two escape marks.
+
+{{figure
+= Input
+{{code :: karas
+\***Bold text.**
+Write a \\ mark.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+*<b>Bold text.</b>
+Write a \ mark.
+}}
+}}

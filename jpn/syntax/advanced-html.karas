@@ -1,0 +1,324 @@
+= Advanced - HTML :: advancedhtml
+
+KARAS を用いて書かれたテキストの中には HTML 含めることができます。これは KARAS の構文だけでは対応できない内容を出力するためのルールです。多くの場合に、KARAS は適切な結果を出力しますが、もしも結果があなたの思うようにならないときは、 HTML を直接書いてください。このページでは HTML に関するルールについて説明します。
+
+{{note
+KARAS が導入されたシステムによっては、セキュリティのために、あるいは出力されるフォーマットのために、 HTML の挿入ができないこともあります。
+}}
+
+[[[toc::2]]]
+
+
+
+
+
+== 最も簡単なサンプル :: easiestsample
+
+例えば、あなたは次のようなテキストを書くことができます。
+
+{{figure
+= Input
+{{code :: karas
+This is <mark>sample</mark> text.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This is <mark>sample</mark> text.</p>
+}}
+}}
+
+次のように KARAS の構文の中に HTML を書くこともできますし、 HTML 要素の中に KARAS の構文を書くこともできます。
+
+{{figure
+= Input
+{{code :: karas
+= This is <mark>heading</mark> sample.
+
+This is <mark>// sample //</mark> text.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<h1>This is <mark>heading</mark>sample.</h1>
+
+<p>This is <mark><i>sample</i></mark> text.</p>
+}}
+}}
+
+
+
+
+
+== &lt; から始まるテキスト :: beginltmark
+
+1つの ``` < ``` 記号で開始するテキストは、HTML テキストと見なされます。HTML テキストはパラグラフになりません。 &lt; で始まるテキストが HTML タグでないときも、パラグラフにならないので注意が必要です。ふつう、記号 &lt; と &gt; は、それぞれ ``` &lt; ``` と ``` &gt; ``` のように文字参照を使って書かれます。
+
+例えば、もしもあなたが // mark // 要素で始まるテキストを書くとき、そのテキストはパラグラフになりません。
+
+{{figure
+= Input
+{{code :: karas
+<mark>This</mark> sample text has wrong.
+
+<This sample text has wrong.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<mark>This</mark> sample text has wrong.
+
+<This sample text has wrong.
+}}
+}}
+
+// mark // 要素の後に続くテキストが HTML の要素で閉じられていないので、出力結果 (HTML) は誤った構造を持っています。
+
+この問題を解決するには、``` \\ ``` を先頭に書いてエスケープします。あるいは、正しい HTML 要素を直接書きます。ここでは // p // 要素です。
+
+{{figure
+= Input
+{{code :: karas
+\<mark>This</mark> sample text is correct.
+
+<p><mark>This</mark> sample text is correct.</p>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p><mark>This</mark> sample text is correct.</p>
+ 
+<p><mark>This</mark> sample text is correct.</p>
+}}
+}}
+
+*** ``` < ``` で開始するテキストに含まれる KARAS の構文は変換されないので注意してください。 ***例えば次のようなとき、 KARAS の構文は変換されず、そのまま出力されます。ここでは // p // 要素の例を示していますが、// h1 // 要素や // div // 要素なども同様に変換されません。
+
+{{figure
+= Input
+{{code :: karas
+<p>This is <mark>// sample //</mark> text.</p>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This is <mark>// sample //</mark> text.</p>
+}}
+}}
+
+KARAS では、パラグラフは空行やその他の KARAS の構文によって区切られます。次の例では、2行目のテキストが ``` < ``` で始まりますが、パラグラフになります。これは1行目がパラグラフの開始位置であるためです。
+
+{{figure
+= Input
+{{code :: karas
+This text become a paragraph.
+<mark>This</mark> line included in paragraph.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This text become a paragraph.
+<mark>This</mark> line included in paragraph.</p>
+}}
+}}
+
+記号 ``` << ``` を使う KARAS の構文(インライングループ)は、 HTML テキストとは見なされず、変換されます。次の例のテキストは、パラグラフになります。
+
+{{figure
+= Input
+{{code :: karas
+<<sample::This>> text become a paragraph.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p><span class="sample">This</span> text become a paragraph.</p>
+}}
+}}
+
+
+
+
+
+== HTML の中の空の行 :: blanklineinhtml
+
+HTML の中に空の行が含まれるときは注意が必要です。 KARAS は空の行によってテキストを分割します。例えば次のようなテキストを書くとき、出力結果は誤った構造を持ちます。
+
+{{figure
+= Input
+{{code :: karas
+<p>This HTML is written by User.
+
+This line is enclosed with blank-line.
+
+</p>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This HTML is written by User. 
+<p>This line is enclosed with blank-line.</p> 
+</p>
+}}
+}}
+
+空の行から開始されるテキストがあるので、KARAS はそのテキストをパラグラフ (//p// 要素) に変換します。 HTML では、 //p// 要素の中に //p// 要素を入れることはできません。したがって、この出力結果は誤った構造を持ちます。この問題は //p// 要素だけのものではありません。 //p// 要素を入れることができないあらゆる HTML 要素がこの問題を持っています。
+
+一方で、これを利用して、 // p // 要素を HTML の中に KARAS の構文を入れる方法もあります。例えば、次のようなテキストは、正しい出力結果に変換されます。
+
+{{figure
+= Input
+{{code :: karas
+<div id="sample">
+
+This line is enclosed with blank-line.
+
+</div>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<div id="sample">
+<p>This line is enclosed with blank-line.</p> 
+</div>
+}}
+}}
+
+
+
+
+
+== 誤った使い方 :: wornguse
+
+KARAS と HTML を組み合わせるときには、次のような誤った使い方に注意が必要です。 HTML を書くときは、 HTML ドキュメントに関する正しい知識を持っていることが重要となります。
+
+
+
+
+
+=== 例 - 1 :: worngsamplea
+
+KARAS で書かれたドキュメントの中にある HTML によって、出力されるHTMLドキュメントが誤った構造を持つことがあります。例えば次のようなテキストは誤りです。
+
+{{figure
+= Input
+{{code :: karas
+= <h1>Heading text</h1>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<h1><h1>Heading</h1></h1>
+}}
+}}
+
+HTML では、// h1-6 // 要素の中には // h1-6 // 要素(フローコンテンツ)を含めることができません。したがって、この HTML ドキュメントの構造は誤りです。
+
+
+
+
+
+=== 例 - 2 :: wrongsampleb
+
+KARAS は、連続するテキストを1つのブロックと見なします。HTML 要素もそのブロックに含まれることがあります。
+
+したがって、例えば、//p// 要素(パラグラフ) の中に入れることができない HTML 要素が、p 要素内に含まれないように注意してください。次のテキストは、誤った構造を持っています。 //p// 要素 (パラグラフ) は //ul// 要素を含めることができません。
+
+{{figure
+= Input
+{{code :: karas
+This text become a paragraph.
+<ul>
+<li>This HTML element is written a user.</li>
+</ul>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This text become a paragraph.
+<ul>
+<li>This HTML element is written a user.</li>
+</ul></p>
+}}
+}}
+
+この問題を解決するには、 //ul// 要素の前に空行を入れます。
+
+{{figure
+= Input
+{{code :: karas
+This text become a paragraph.
+
+<ul>
+<li>This HTML element is written a user.</li>
+</ul>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This text become a paragraph.</p>
+<ul>
+<li>This HTML element is written a user.</li>
+</ul>
+}}
+}}
+
+
+
+
+
+=== 例 - 3 :: wrongsamplec
+
+KARAS の構文と HTML とが組み合わせられないパターンもあります。例えば次のようにリストを書くときです。 //ul// 要素の中に2つの //li//要素が含まれるように見えますが、出力結果は期待した通りにはなりません。
+
+{{figure
+= Input
+{{code :: karas
+- KARAS list
+<li> HTML list </li>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<ul>
+<li>KARAS list
+<li> HTML list </li></li>
+</ul>
+}}
+}}
+
+ここでは //ul// 要素や //li// 要素の例を示していますが、例えばテーブルなどでも同じです。
+
+
+
+
+
+== //pre//, //code//, //samp// 要素内にある &lt; と &gt; :: ltgtinprecodesamp
+
+KARAS は //pre//, //code//, //samp// 要素を出力するためのブロックグループ構文を持っています。これらのブロックグループの中に書かれた記号 &lt; と &gt; は文字参照に変換して出力されます。しかし、 ***//pre//, //code//, //samp// 要素が HTML として直接書かれるとき、その中の記号 &lt; と &gt; は変換されません。また、それらの要素にある KARAS の構文も変換されません。 ***

@@ -1,0 +1,25 @@
+= Concept & Rationale :: cncptrationale
+
+This page describe the concept and rationale of design of KARAS. Especially, when developing a new lightweight markup language or derived language of KARAS, you should read these before starting it.
+
+
+
+
+
+== Pages :: pages
+
+I'm sorry but these pages are now draft. I'll translate these page as soon as possible.
+
+- Philosophy
+- Base concept
+- Sytanx design
+- Regarding HTML
+- Unsupported features
+
+##
+- ((./philosophy.html :: Philosophy))
+- ((./baseconcept.html :: Base concept))
+- ((./syntaxdesign.html :: Sytanx design))
+- ((./regardinghtml.html :: Regarding HTML))
+- ((./unsupportedfeatures.html :: Unsupported features))
+##

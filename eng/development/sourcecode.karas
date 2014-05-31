@@ -1,0 +1,62 @@
+= Source Code :: sourcecode
+
+Default converter of KARAS is coded to share the algorithm and the code between any language. Therefore, it is not optimized for each language and each environment. These codes have a not a few redundancy. In other words, source code is written with simplest way, and it can be quickly changed when it needs. 
+
+This page describe some coding rule of default converter of KARAS.
+
+{{note
+There are possibility that the algorithm is improved in future. But optimization for each language and each environment are not.
+}}
+
+[[[toc :: 2]]]
+
+
+
+
+
+== Code Column :: codecolumn
+
+As long as there is no restriction of language and the standard class library, code column is limited to 100 characters in a single line. Break position is depending on the situation.
+
+
+
+
+
+== Naming Rule :: namingrule
+
+As long as there is no restriction of language and the standard class library, class name and the others are named with following rule.
+
+- Namespace, class, and constant are named with UpperCamel(Pascal) case.
+-- If it is restricted, named with lowerCamel case.
+- function, instance, and local value are named with lowerCamel case.
+
+I know that some language such as Ruby is using snake_case by convention, but all of the code of KARAS is not using it.
+
+In Javascript, all of the class name is named with lowercase, because the way of including external file is restricted.
+
+
+
+
+
+== Operator :: operator
+
+```++``` and ```--``` are not using to increment or decrement. Because Ruby does not support this way.
+
+When checking the value by using ```if```, it have to use ```==```. And in Ruby, it must not use ```unless```.
+
+
+
+
+
+== Regex :: regex
+
+Because ECMAscript(Javascript) does not have a lookbehind feature in the Regex, KARAS does not use it. For the same reason, named capture groupe is also does not.
+
+
+
+
+== Others :: others
+
+Enum, lambda and anonymous class are not used. These can be used to implement efficient processing and more secure design. However, default code never use these features.
+
+Code-block marks ```{``` and ```}``` which using with ```if```, ```for```, ```try```, or any other cannot be omitted in any case.

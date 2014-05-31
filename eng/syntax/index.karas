@@ -1,0 +1,16 @@
+= Syntax :: syntax
+
+These pages describe the syntax of KARAS. If you are a beginner, please read in order from the top of these.
+
+
+
+
+
+== Pages :: pages
+
++ ((./basicsyntax.html :: Basic Syntax))
++ ((./basicsyntax-group.html :: Basic Syntax - Group))
++ ((./advanced.html :: Advanced))
++ ((./advanced-html.html :: Advanced - HTML))
++ ((./pluginsyntax.html :: Plugin Syntax))
++ ((./cheatsheet.html :: Cheat Sheet))

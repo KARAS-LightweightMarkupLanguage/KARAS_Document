@@ -1,0 +1,66 @@
+= Download
+
+In this page, you can download source code of KARAS converter and the plugin for using KARAS on each system.
+
+[[[toc::2]]]
+
+
+
+
+
+== Plugins :: Plugins
+
+KARAS is intended for UTF-8 character encoding. In system which using the other encoding, this may cause problems. Especially, when it use multi-byte character such as Japanese. If your system use non-UTF-8 multi-byte character encoding, please note.
+
+
+
+
+
+=== KARAS for WordPress :: karasForWordPress
+
+This WordPress plugin will be hooked to ``` the_content ``` as //Filter//. Unzip your download file, and put into ``` plugins ``` directory.
+
+Meta-box of KARAS (custom fields) will appears in the article post screen. If checked, the syntax of the KARAS in article will be converted.
+
+{{figure
+(((../resource/WordPressPost.png)))
+}}
+
+When KARAS applied, any other filters hooked to ``` prepend_attachment ``` will not apply. (Filter which hooked later than KARAS will apply.) In order to change this behavior, need knowledge about WordPress and the plugin developing. When your WordPress not using filter plugin, no problem will occur. 
+
+<<download :: ** Download ** \: ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_WordPress/archive/master.zip :: KARAS for WordPress))>>
+
+
+
+
+
+=== KARAS for Jekyll :: KarasForJekyll
+
+This Jekyll plugin acts as //Converter//. Unzip your download file, and put each files into ``` _plugins ``` directory. There is no need to change the any other settings. Text file with the extension ```. karas ``` will be converted to an HTML page.
+
+KARAS for Jekyll has one important problem. Jekyll has a template engine //Liquid//, and the syntax conflicts with Block group syntax of KARAS. Even if the results of KARAS not include ``` {{ ``` symbol, //Liquid// throws exception. Because this problem can not be corrected from plugin, Block group syntax in KARAS for Jekyll is slightly modified.
+
+In order to write a Block group in KARAS for Jekyll, use ``` {\\{ ``` and ``` {\\{ ```,  insted of ```{{``` and ```}}```. Unfortunately, this would detract from the beauty of KARAS. However, I could not find any other way.
+
+{{note
+Because of this problem, ```KARAS.rb``` included in KARAS for Jekyll is not same as original ```KARAS.rb```.
+}}
+
+<<download :: 
+** Download ** \: ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_Jekyll/archive/master.zip :: KARAS for Jekyll))>>
+
+
+
+
+
+== Source Code :: Source code
+
+The original source code of KARAS converters are published in GitHub. If you are developer, I recommend to read ((./Development/index.html :: Development)) page.
+
+- ((https://github.com/KARAS-LightweightMarkupLanguage :: KARAS - Organization))
+-- ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_CSharp :: KARAS_CSharp))
+-- ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_Javascript :: KARAS_Javascript))
+-- ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_PHP :: KARAS_PHP))
+-- ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_Ruby :: KARAS_Ruby))
+-- ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_Jekyll :: KARAS_Jekyll))
+-- ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_WordPress :: KARAS_WordPress))

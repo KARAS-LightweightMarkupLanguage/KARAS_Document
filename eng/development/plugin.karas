@@ -1,0 +1,129 @@
+= Plugin :: plugin
+
+This page describe development of Plugin syntax.
+
+[[[toc::2]]]
+
+
+
+
+
+== Directory and File :: directoryfile
+
+It is recommended that the name of plugin directory is ```plugins```. And the plugin directory should be set at the same directory of executable file of KARAS. However, if your system settings conflict with these rules, it can be changed. In default converter, to change the directory name or that path, needs to modify the source code directly.
+
+The name of the plugin must be same as the plugin's //class// or //module// name. It is considered that the name of the plugin is written in upper or lower case. For example, when the plugin's name is //Sample//, the file name must be //Sample.ext//. Then, the //class// or //module// is //Sample//. If your system has a problem which caused by these rules, it can be changed. In default converter, to change the naming rule, needs to modify the source code directly.
+
+{{note
+This does not apply to namespace of Javascript ver. To avoid the algorithm become complicated, the namespace is defined with lower case. For more information, please read the source code of the Javascript ver. plugin.
+}}
+
+
+
+
+
+== Plugin Syntax :: pluginsyntax
+
+In KARAS, plugin syntax is defined like this.
+
+{{figure
+= Convert type plugin (Level1)
+{{code :: karas
+[[ PluginName :: option1 :: option2... :: markedupText]]
+}}
+}}
+
+{{figure
+= Action type plugin (Level2)
+{{code :: karas
+[[[ PluginName :: option1 :: option2...]]]
+}}
+}}
+
+- ***```PluginName``` must ignore the case.*** Even if it is written in upper case or lower case, it must call same plugin.
+- Option must be divided with ```\:\:```.  It is not recommended to divide with ```,``` or any other.
+- The value of ```option1-optionX``` must ignore the case, when it is used in order to change the process.
+-- For example, when using ```true``` / ```false```, the result must be same as when using ```TRUE```/ ```FALSE```.
+- When set the markedup text as option which is not parameter, it must be set at the end of the options.
+
+
+
+
+
+== How to Develop a Plugin :: developplugin
+
+In default converter, plugin syntax will be converted before any other KARAS syntax will be. This is because that there are non-KARAS syntax in plugin text. For example, LaTeX is one of sample. Usually, system is developed like this. However, you can change the order of the conversion process if you need. When implementing plugin, the way of implementation is not limited. You have only to keep the format of Plugin syntax. 
+
+
+
+
+
+== Convert type Plugin :: convertplugin
+
+Convert type plugin is a plugin to output a new text from the marked up text.
+
+{{figure
+= Syntax
+{{code :: karas
+[[PluginName::markedupText :: options0 :: options1 :: ･･･]]
+}}
+}}
+
+{{figure
+= Implement
+{{code :: csharp
+public static Convert(markedupText, options)
+return string
+}}
+}}
+
+Args ```markedupText``` is string type text which is marked up in the plugin syntax. Args ```options``` is array of string type which is marked up as option in the plugin syntax. Therefore, for example, when specify the value type option, it have to be converted to value type in the plugin. The return value is a new text which replaced the marked up text.
+
+
+
+== Action type Plugin :: actionplugin
+
+Action type plugin is a plugin to output a new text with whole of the text. For example, you can develop a plugin to search all heading in the text and list them.
+
+{{figure
+= Syntax
+{{code :: karas
+[[[PluginName::options0 :: options1 :: ･･･]]]
+}}
+}}
+
+{{figure
+= Implement
+{{code :: csharp
+public static string Action(text, options)
+return string
+}}
+}}
+
+Args ```text``` is whole of the text which has the Action type plugin text. Args ```options``` is array of string type which is marked up as option in the plugin syntax. Therefore, for example, when specify the value type option, it have to be converted to value type in the plugin. The return value is a new text which replaced the marked up text.
+
+
+
+
+
+== Other tips :: othertips
+
+
+
+
+
+=== \[\[ and \]\] in Plugin Syntax :: psyntaxmars
+
+It is not allow you to write $$ \[\[ $$ and $$ \]\] $$ marks (not as plugin) in plugin syntax. This is an unsolvable problem. In order to avoid this problem, you can escape these marks with ```\\```. Or, avoid by the implementation process of the plugin.
+
+
+
+
+
+=== To Fast Conversion :: tofastconvert
+
+If need fast conversion, it is important to pre compile the plugin. For example, when using plugin in system like Wiki, it is good way to compile all of the plugin once when the system start. Or, it is also good to cache the converted HTML.
+
+In language such as C# or Java, run-time compilation is very slow. In such case, you may use pre compiled plugins. However, need to be care when using it. You can not read the source code of the pre compiled plugins. Therefore, when using pre compiled plugin which developed by other than you, it may output a malicious code in the result.
+
+In order to solve this problem, plugin's souce code must be open, and need to be compiled by the user. Developers must be careful about how to publish.

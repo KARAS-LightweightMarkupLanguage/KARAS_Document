@@ -1,0 +1,66 @@
+= Download
+
+このページでは KARAS の標準的なコンバータや、各システムで KARAS を使うためのプラグインをダウンロードすることができます。
+
+[[[toc::2]]]
+
+
+
+
+
+== Plugins :: Plugins
+
+KARAS は文字エンコ―ディング UTF-8 を対象としています。これ以外のエンコーディングをもったシステムでは、問題を起こす可能性があります。また、日本語などのマルチバイトの環境では、問題を起こす可能性があります。UTF-8 以外のマルチバイトのシステムでは、特に注意が必要です。
+
+
+
+
+
+=== KARAS for WordPress :: karasForWordPress
+
+この WordPress プラグインはフィルタ (Filter) として ``` the_content ``` にフックして動作します。 ``` plugins ``` ディレクトリに、ダウンロードしたディレクトリを解凍して入れてください。
+
+記事投稿画面に KARAS のメタボックス (カスタムフィールド) が表示されます。チェックを入れると、記事の中にある、KARAS の構文が変換されます。
+
+{{figure
+(((../resource/WordPressPost.png)))
+}}
+
+KARAS が適用されると、 ``` prepend_attachment ``` にフックされたフィルタ以外のすべてのフィルタが適用されなくなります。(KARAS よりも後にフックされたフィルタは適用されます。) フィルタを使って変換するようなプラグインを持っていない WordPress では、問題は起こりません。この動作を変更するためには、WordPress のプラグインを開発するための知識が必要です。
+
+<<download :: ** Download ** \: ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_WordPress/archive/master.zip :: KARAS for WordPress))>>
+
+
+
+
+
+=== KARAS for Jekyll :: KarasForJekyll
+
+コンバータ (Converter) として動作する Jekyll 向けのプラグインです。 ``` _plugins ``` ディレクトリにダウンロードしたディレクトリを展開してください。それ以外に設定を変更する必要はありません。拡張子 ``` .karas ``` をもつテキストファイルが、HTML ページへと変換されます。
+
+KARAS for Jekyll は1つの問題を持っています。Jekyll はテンプレートエンジン // Liquid // を持っています。KARAS の Block group の構文 ``` {{ ``` と、Liquid の構文 ``` {{ ``` は衝突します。 KARAS が最終的に出力する結果に ``` {{ ``` 記号が含まれていなくても、Jekyll に含まれる Liquid は Exception を発生させます。この問題はプラグインから修正することが出来ないので、KARAS の Block group の構文をわずかに変更しています。
+
+KARAS for Jekyll で　Block group を書くためには、 ``` {{ ``` と ``` }} ``` ではなく、 ``` {\\{ ``` と ``` }\\} ``` を使います。残念なことに、これは KARAS の美しさを損ねてしまいますが、他にどうしようもありませんでした。もしも必要なら、HTML を直接書くことができます。
+
+{{note
+この問題によって KARAS for Jekyll に含まれる ``` KARAS.rb ``` は、オリジナルの ``` KARAS.rb ``` とは異なリます。この問題は将来的に異なる方法で解決される可能性があります。
+}}
+
+<<download :: 
+** Download ** \: ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_Jekyll/archive/master.zip :: KARAS for Jekyll))>>
+
+
+
+
+
+== Source code :: Source code
+
+KARAS のソースコードは GitHub で公開しています。開発者の方は ((./Development/index.html :: Development)) のページを合わせて読むことを推奨します。
+
+- ((https://github.com/KARAS-LightweightMarkupLanguage :: KARAS - Organization))
+-- ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_CSharp :: KARAS_CSharp))
+-- ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_Javascript :: KARAS_Javascript))
+-- ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_PHP :: KARAS_PHP))
+-- ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_Ruby :: KARAS_Ruby))
+-- ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_Jekyll :: KARAS_Jekyll))
+-- ((https://github.com/KARAS-LightweightMarkupLanguage/KARAS_WordPress :: KARAS_WordPress))

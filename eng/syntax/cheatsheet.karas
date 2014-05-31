@@ -1,0 +1,133 @@
+= Cheat Sheet :: cheatsheet
+
+{{figure::cheatsheet
+
+{{columns
+
+{{column
+{{figure
+= Block markup
+!| Mark !< Output                        !< MaxLevel
+!| =    || &lt;h1-6&gt;, &lt;hr&gt;      || 6, 7-
+!| -    || &lt;ul&gt;&lt;li&gt;          || none
+!| +    || &lt;ol&gt;&lt;li&gt;          || none
+!| ;    || &lt;dl&gt;&lt;dt&gt;&lt;dd&gt;|| 2
+!| &gt; || &lt;blockquote&gt;            || none
+}}
+}}
+
+
+
+
+
+{{column
+{{figure
+= Table markup
+!| Mark    !< Output
+!| \|\|    || &lt;td&gt;
+!| \!\|    || &lt;th&gt;
+!| \|\&gt; || &lt;td style="text-align:left;"&gt;
+!| \|\&lt; || &lt;td style="text-align:right;"&gt;
+!| \|\=    || &lt;td style="text-align:center;"&gt;
+}}
+}}
+
+}}columns
+
+
+
+
+
+{{columns
+
+{{column
+{{figure
+= Inline markup
+!| Mark !< Level1       !< Level2
+!| \*\* || &lt;b&gt;    || &lt;strong&gt;
+!| \/\/ || &lt;i&gt;    || &lt;em&gt;
+!| \_\_ || &lt;u&gt;    || &lt;ins&gt;
+!| \%\% || &lt;s&gt;    || &lt;del&gt;
+!| \'\' || &lt;sup&gt;  || &lt;ruby&gt; <br> need \:\: option
+!| \,\, || &lt;sub&gt;  || :::
+!| \"\" || &lt;q&gt;    || 
+!| \@\@ || &lt;cite&gt; || &lt;small&gt;
+!| \`\` || &lt;var&gt;  || &lt;code&gt;
+!| \$\$ || &lt;kbd&gt;  || &lt;samp&gt;
+!| \?\? || &lt;dfn&gt;  || &lt;abbr&gt;
+}}
+}}
+
+
+
+
+{{column
+{{figure
+= Link markup
+!| Mark              !< Output
+!| \(\(/\)\)         || &lt;a&gt;
+!| \(\(\(/\)\)\)     || &lt;img&gt; 
+!| :::               || &lt;audio&gt;
+!| :::               || &lt;video&gt;
+!| :::               || &lt;object&gt; 
+!| \:\: // option // || as // alias // or // media option //
+
+##
+メディアの出力形式は拡張子とシステム環境に依存します。
+##
+
+Output format of media depends on the system and the syntax.
+}}
+}}
+
+}}columns
+
+
+
+
+
+{{columns
+
+{{column
+{{figure
+= Inline group
+!| Mark                      !< Output
+!| &lt;&lt;/&gt;&gt;         || &lt;span class="option"&gt;
+!| &lt;&lt;&lt;/&gt;&gt;&gt; || &lt;span id="option"&gt;
+!| \:\: // option //         || as // class // or // id //
+}}
+
+{{figure
+= Others
+!| Mark       !< Output
+!| ~\\n       || &lt;b&gt;
+!| \#\#       || comment out.
+!| \\         || escape.
+}}
+}}
+
+
+
+
+
+{{column
+{{figure
+= Block group
+!| Mark                   !< Output
+!| \{\{// option //\}\} || &lt;div class="option"&gt;
+!| \:\: // option //      || as // class // of reserved group
+}}
+
+{{figure
+= Reserved group
+|| div,    || header  || footer
+|| nav     || article || section
+|| aside   || address || ::
+|| details || figure  || ::
+|| pre     || code    || samp
+}}
+}}
+
+}}cloumns
+
+}}cheatsheet

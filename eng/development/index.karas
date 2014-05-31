@@ -1,0 +1,27 @@
+= Development :: development
+
+These pages provide information for KARAS developers. When implementing KARAS to your system, please read ((./System requirements.html :: System Requirements)). When developing a plugin of KARAS, please read ((./Plugin.html :: Plugin)) page. When developing a new language, want to modify or add syntax, or want to know rationale of the design of KARAS, read ((./Concept and rationale/index.html :: Concept & Rational)) page.
+
+
+
+
+== Pages :: pages
+
+- ((./systemrequirements.html :: System Requirements))
+- ((./sourcecode.html :: Source code))
+- ((./plugin.html :: Plugin))
+- ((./conceptandrationale/index.html :: Concept & Rational))
+-- I'm sorry but these pages are now draft. I'll translate these page as soon as possible.
+-- Philosophy
+-- Base concept
+-- Sytanx design
+-- Regarding HTML
+-- Unsupported features
+
+##
+-- ((./conceptandrationale/philosophy.html :: Philosophy))
+-- ((./conceptandrationale/baseconcept.html :: Base concept))
+-- ((./conceptandrationale/syntaxdesign.html :: Sytanx design))
+-- ((./conceptandrationale/regardinghtml.html :: Regarding HTML))
+-- ((./conceptandrationale/unsupportedfeatures.html :: Unsupported features))
+##

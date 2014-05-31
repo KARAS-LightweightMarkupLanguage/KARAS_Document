@@ -1,0 +1,16 @@
+= What's KARAS ? :: whatskaras
+
+***?? KARAS?? is a lightweight markup language. *** By using KARAS, you can easily and quickly generate rich HTML document. KARAS is more intuitive than the other lightweight markup language, and the learning cost is low, but has enough features to write a document.
+
+*** KARAS is open source product (BSD). *** You can get the source code to convert the syntax. Currently, ///C#///, ///Javascript///, ///PHP///, and ///Ruby/// version are available. Moreover, there are plugins for Jekyll and WordPress, so you can start KARAS right now.
+
+***KARAS can be extended the function.*** Plugin syntax is able to realize a various functions different from the standard markup. When you use or develop a system like CMS, KARAS and the plugin syntax are very useful.
+
+First, let's try KARAS. You can test KARAS on your Web browser right now.
+
+- *** ((./KARAS_Javascript/index.html :: KARAS.js Sandbox)) ***
+
+
+{{note
+The current version is α. There is no important specification change in next version, but small specifications may change. We will prepare full English document in the next β version. However, please do not expect the quality. *** If you could help me, please correct my bad English. ***
+}}

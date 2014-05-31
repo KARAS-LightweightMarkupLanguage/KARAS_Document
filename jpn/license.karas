@@ -1,0 +1,90 @@
+= Author & License :: authorandlicense
+
+
+
+
+
+== Author :: author
+
+KARAS に関するすべてのものは、著作権者 / 開発者に関連する KARAS 以外のあらゆる団体から独立し、一切の関連がないことをここに明記します。
+
+- Daiki Umeda (XJINE)
+- HP : ((http://lightweightmarkuplanguage.com))
+- Contact : ((mailto:xjinesproject@gmail.com :: xjinesproject@gmail.com))
+- Twitter
+-- Official : ((https://twitter.com/LML_KARAS))
+-- Author (JPN) : ((https://twitter.com/XJINE))
+
+{{note
+I'm not good at english. Please guess even if there is wrong (or rude) it.
+}}
+
+
+
+
+
+== License :: license
+
+
+
+
+
+=== KARAS :: karaslicense
+
+KARAS とその変換プログラムは BSD License で公開されます。 
+
+{{pre :: license
+Copyright (c) 2014, Daiki Umeda (XJINE) - lightweightmarkuplanguage.com
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+* Neither the name of the copyright holder nor the names of its
+  contributors may be used to endorse or promote products derived from
+  this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+}}
+
+
+
+
+
+=== Document :: karasdoclicense
+
+ここに公開される KARAS のドキュメントは、** ((http://creativecommons.org/licenses/by/4.0/ :: Creative Commons - Attribution International (CC BY\))) ** で公開されます。
+
+
+
+
+
+=== Trademark :: karastmlicense
+
+KARAS のトレードマークは ** ((http://creativecommons.org/licenses/by-nd/4.0/ :: Creative Commons - Attribution-NoDerivatives International (CC BY-ND\))) **で公開されます。
+
+トレードマークのデザインは改変することができませんが、商用非商用問わずに利用することができます。ただし KARAS のトレードマークが使用されたあらゆるドキュメントやプロダクトが KARAS に関連したものであることを、KARAS の作者や団体は保証しません。またデザインを改変することはできませんが、リサイズは許可されます。
+
+- KARAS - Trademark
+-- ((../resource/KARAS_TM_BLACK.png :: Black ver.))
+-- ((../resource/KARAS_TM_WHITE.png :: White ver.))
+
+{{note
+KARAS の名前を含めたトレードマークは検討中です。このページのタイトルでは Verdana を利用しています。
+}}

@@ -1,0 +1,448 @@
+= Advanced :: advanced
+
+This pages describe about the advanced usage or wrong usage of KARAS. Please read to write a good document by KARAS.
+
+[[[toc::2]]]
+
+
+
+
+
+== Continuous Text :: continuoustext
+
+In KARAS, continuous text which has no blank line is considered as a one text. For example, even if the heading text has line-breaks, all of the lines become a heading.
+
+{{figure
+= Input
+{{code :: karas
+= The 2nd line of this text
+is included in Heading
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<h1>The 2nd line of this text
+is included in Heading</h1>
+}}
+}}
+
+List, blockquote or any other syntax also has this rule.
+
+
+
+
+
+== Appearance of Line-break :: linebreaklooks
+
+User agent like browser render line-break as white-space. Some language like Japanese has a problem caused by this rule. Language that not separate each words by space has this problem.
+
+KARAS not remove the line-break. For example, following text which is not separated by white-space gets a problem.
+
+{{figure
+= Input
+{{code :: karas
+ABCDEFGHIJK
+LMNOPQRSTU
+}}
+}}
+
+{{figure
+= On user agent
+{{code :: text
+ABCDEFGHIJK LMNOPQRSTU
+}}
+}}
+
+Like this, there is a space between K and L. If this text is written in a language that not separate each words by space, this space is not good. When you use KARAS in such language, be careful with line-break position to avoid this problem.
+
+
+
+
+
+== Cell Text Can't Break the Line.:: cellcantbreakline
+
+Text in table cell can't break the line. Because the table row is defined by line-break. If line-break is needed in the cell text, you should reconsider the text first.
+
+If absolutely necessary, write a ```<br>``` element directly to break the line. In KARAS, the text enable to include HTML tag. However, in some system, you may not insert HTML tag because of the security. In such case, you can not break the line in cell.
+
+
+
+
+
+== Output format of Link :: medialinkformat
+
+Link has 2 pattern. One of it, there are link and the other text. And the other case, there is only link. In KARAS, when the continuous text consisted of only link, each links becomes a independent content. (It means the link is outputted as flow content in HTML.) When the text consisted of link and the other text, it becomes paragraph, and the link is included in it. (It means the link is outputted as phrasing content in HTML.)
+
+{{figure
+= Input
+{{code :: karas
+((URL::This link text)) become a paragraph. 
+
+((URL::Independent link text))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p><a href="URL">This link text</a> become a paragraph.</p>
+
+<a href="URL">Independent link text</a>
+}}
+}}
+
+This rule is enabled even if the link shows media, like image.
+
+{{figure
+= Input
+{{code :: karas
+This (((ImageURL.jpg))) is included in paragraph. 
+
+(((IndependentImageURL.jpg)))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This <img src="ImageURL.jpg" alt="ImageURL.jpg"> is included in paragraph.</p>
+
+<img src="IndependentImageURL.jpg" alt="IndependentImageURL.jpg">
+}}
+}}
+
+
+
+
+
+== Syntax Combination :: syntaxcombination
+
+KARAS syntax can be used with the other KARAS syntax. Following sample is one of it, link in heading, and heading in blockquote. There are lot of combination pattern, so can not describe all.
+
+{{figure
+= Input
+{{code :: 
+= (( URL :: Heading with Link ))
+
+> = Heading in blockquote
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<h1><a href="URL">Heading with Link</a></h1>
+
+<blockquote>
+<h1>Heading in blockquote</h1>
+</blockquote>
+}}
+}}
+
+
+
+
+
+== Syntax Nest :: nestedsyntax
+
+Syntax can be nested. For example, following sample shows bold and italic text.
+
+{{figure
+= Input
+{{code :: karas
+** //Blod and italic text.// **
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<b><i>Bold and italic text.</i></b>
+}}
+}}
+
+
+
+
+
+=== Wrong Nest :: wrongnest
+
+Some patterns can not be nested. Syntax using same mark can not be nested. For example, bold and strong syntax can not be nested each other.
+
+{{figure
+= Input
+{{code :: karas
+**This text has ***strong importance***.**
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<b>This text has </b>*strong importance<b>*.</b>
+}}
+}}
+
+And, it is impossible to write staggered syntax, like a following sample.
+
+{{figure
+= Input
+{{code :: karas
+**// Bold and italic text **//
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<b>// Bold and italic text</b>//
+}}
+}}
+
+
+
+
+
+== Special Nest :: specialnest
+
+Syntax which start and end mark are different can be nested. Link, Inline group, Block group can be nested.
+
+
+
+
+
+=== Nested link :: nestedlink
+
+Link can be nested. For example, following sample shows image and video which has link. 
+
+{{figure
+= Input
+{{code :: karas
+((URL::(((ImageURL.jpg)))))
+((URL::(((VideoURL.mp4)))))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<a href="URL"><img src="ImageURL.jpg" alt="ImageURL.jpg"></a>
+<a href="URL"><video src="VideoURL.mp4…</video></a>
+}}
+}}
+
+And, when the URL and Media-URL are same, write like this.
+
+{{figure
+= Input
+{{code :: karas
+(((((ImageURL.jpg)))))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<a href="ImageURL.jpg"><img src="ImageURL.jpg" alt="ImageURL.jpg"></a>
+}}
+}}
+
+Be careful with wrong nest. Usually, it does not allow you to give a link in the media. It outputs the text which has wrong structure.
+
+{{figure
+= Input
+{{code :: karas
+(((MediaURL :: ((URL)))))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<img src="ImageURL.jpg" alt="ImageURL.jpg" <a href="URL">URL</a>>
+}}
+}}
+
+
+
+
+
+=== Nested Inling Group :: nestedigroup
+
+Also inline group can be nested. You can nest //class// group into //id// group, and the opposite is also true.
+
+{{figure
+= Input
+{{code :: karas
+<<smplcls::cls grp <<smplcls::cls grp in cls grp>>>>
+<<<smplid::id grp <<smplcls::cls grp in id grp>>>>>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<span class="smplcls">cls grp <span class="smplcls">cls grp in cls grp</span></span>
+<span id="smplid">id grp <span class="smplcls">cls grp in id grp</span></span>
+}}
+}}
+
+Inline group which has 3 or more ``` < ``` and ```>``` marks becomes //id// group.
+
+{{figure
+= Input
+{{code :: karas
+<<<<<sampleid :: id group>>>>>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<span id="sampleid">id group</span>
+}}
+}}
+
+
+
+
+
+=== Nested Block Group :: nestedbgroup
+
+Block group can be nested in block group.
+
+{{figure
+= Input
+{{code :: karas
+{{parentgroup 
+Contents in parent group.
+{{childgroup
+Contents in child group.
+}}
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<div class="parentgroup">
+<p>Contents in parent group.</p>
+<div class="childgroup">
+<p>Contents in child group.</p>
+</div>
+</div>
+}}
+}}
+
+However, block group can not be nested in //pre//, //code//, //kbd//, //samp// group. Block group syntax is not converted.
+
+{{figure
+= Input
+{{code :: karas
+{{code
+{{childgroup 
+Contents in child group.
+}}
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<code>
+{{childgroup
+Contents in child group.
+}}
+</code>
+}}
+}}
+
+
+
+
+
+== Linked Note & Footnote :: footnote
+
+Lot of lightweight markup language and the system have a syntax to write a footnote, but KARAS does not have. However, by using inline group and link syntax, you can output a linked note (like footnote).
+
+{{figure
+= Input
+{{code :: karas
+KARAS ''((#fn1::*1))'' is lightweight markup language.
+
+Some paragraphs...
+
+<<<fn1::*1>>> Footnote text.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+KARAS <sup><a href="#fn1">*1</a></sup> is lightweight markup language.
+
+Some paragraphs...
+
+<span id="fn1">*1</span> Footnote text.
+}}
+}}
+
+
+
+
+
+== Don't put a Cite into Blockquote :: citeandbq
+
+//Blockquote// should be used to indicate the contents is quoted. Therefore, I think, the //cite// element in //blockquote// must been shown as the quoted //cite// element. 
+
+If you want to group //blockquote// and the //cite// (or original url, etc...), you should use //block group// syntax. For example, write like a following sample. Because the characters 'blockquote' is not reserved name by //block group// syntax, it becomes class name of //div// element. Or, you can simply name it 'quote'.
+
+{{figure
+= Input
+{{code :: karas
+{{blockquote
+> This is quote text.
+@@Title@@
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<div class="blockquote">
+<blockquote>
+<p>This is quote text.</p>
+</blockquote>
+<cite>Title</cite>
+</div>
+}}
+}}
+
+
+
+
+
+== Don't write a 'Quote mark' to Quoted text:: quotemark
+
+Text enclosed with ```\"\"``` becomes quoted text, but you don't have to write quote marks like ```\" ```, ```\'```, or ```\<\<\>\>``` in it. Lot of user agent (like browser) automatically insert quote marks to it. For example, following text has wrong.
+
+{{figure
+= Input
+{{code :: karas
+"" "This is quoted text." ""
+}}
+}}
+
+{{figure
+= On user agent
+{{code :: text
+""This is quoted text.""
+}}
+}}
+
+However, that this shall not apply to the case that the output format of KARAS converter is not HTML. And, few user agent may not support this feature.

@@ -1,0 +1,447 @@
+= Advanced :: advanced
+
+このページでは KARAS のより進んだ使い方や誤った使い方などについて解説します。KARAS を使ってより良いドキュメントを書くために読んでください。
+
+[[[toc::2]]]
+
+
+
+
+
+== 連続したテキスト :: continuoustext
+
+KARAS では、空行を持たない連続したテキストを1つのテキストとして見なします。例えば、見出し要素に改行があっても、すべての行が見出しになります。
+
+{{figure
+= Input
+{{code :: karas
+= The 2nd line of this text
+is included in Heading
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<h1>The 2nd line of this text
+is included in Heading</h1>
+}}
+}}
+
+リストや大きな引用などの構文も、このルールを持っています。
+
+
+
+
+
+== 改行の見え方 :: linebreaklooks
+
+ブラウザなどのユーザエージェントは、改行を空白としてレンダリングします。日本語などの一部の言語は、このルールが原因となる問題を持っています。単語をスペースで区切らない言語は、この問題を持っています。
+
+KARAS はテキストの改行を削除しません。例えば次のような単語を半角スペースで区切らない言語のテキストが書かれるとき、問題が発生します。
+
+{{figure
+= Input
+{{code :: karas
+ABCDEFGHIJK
+LMNOPQRSTU
+}}
+}}
+
+{{figure
+= On user agent
+{{code :: text
+ABCDEFGHIJK LMNOPQRSTU
+}}
+}}
+
+このように、K と L の間にスペースが入ってしまいます。もしもこれが単語をスペースで区切らない言語でかかれたテキストなら、このスペースは良くありません。そのような言語で KARAS を使うときは、この問題を回避するために、改行する位置に注意してください。
+
+
+
+
+
+== テーブルセルでは改行できない :: cellcantbreakline
+
+テーブルでは改行したテキストを入れることはできません。テーブルの行は改行によってを決定されるためです。もしもセルの中で改行が必要であるなら、まずはそのテキストの内容を見直すべきです。
+
+どうしても必要な時は、``` <br> ``` を直接書いて改行します。 KARAS では、 KARAS の構文に HTML タグを含めることができます。ただし一部のシステムでは、セキュリティのために HTML を挿入することができないかもしれません。そのような場合は、セル内で改行することはできません。
+
+
+
+
+== リンクの出力形式 :: medialinkformat
+
+リンクには2つのパターンがあります。1つは、リンクと他のテキストがある場合です。もう1つは、リンクだけがある場合です。KARAS では、連続したテキストがリンクだけで構成されるとき、そのリンクはそれぞれ独立したコンテンツになります。(HTML における flow コンテンツとして出力される。)一方で、テキストがリンク以外のテキストを持つときは、パラグラフとして出力され、リンクはその中に含まれます。(HTML におけるフレージングコンテンツとして出力される。)
+
+{{figure
+= Input
+{{code :: karas
+((URL::This link text)) become a paragraph. 
+
+((URL::Independent link text))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p><a href="URL">This link text</a> become a paragraph.</p>
+
+<a href="URL">Independent link text</a>
+}}
+}}
+
+これは画像などのメディアのリンクでも同じです。
+
+{{figure
+= Input
+{{code :: karas
+This (((ImageURL.jpg))) is included in paragraph. 
+
+(((IndependentImageURL.jpg)))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<p>This <img src="ImageURL.jpg" alt="ImageURL.jpg"> is included in paragraph.</p>
+
+<img src="IndependentImageURL.jpg" alt="IndependentImageURL.jpg">
+}}
+}}
+
+
+
+
+
+== 構文の組み合わせ :: syntaxcombination
+
+KARAS の構文はいくつか組み合わせて書くことができます。例えば、見出しにリンクをつけたり、大きな引用の中に見出しを書くときは次のように書きます。他にも、組み合わせのパターンは大量にあり、すべて紹介することはできません。
+
+{{figure
+= Input
+{{code :: 
+= (( URL :: Heading with Link ))
+
+> = Heading in blockquote
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<h1><a href="URL">Heading with Link</a></h1>
+
+<blockquote>
+<h1>Heading in blockquote</h1>
+</blockquote>
+}}
+}}
+
+
+
+
+
+== 構文のネスト :: nestedsyntax
+
+構文は入れ子にすることができます。例えば次の例は、太字で斜体のテキストになります。
+
+{{figure
+= Input
+{{code :: karas
+** //Blod and italic text.// **
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<b><i>Bold and italic text.</i></b>
+}}
+}}
+
+
+
+
+
+=== 誤ったネスト :: wrongnest
+
+入れ子にすることができないパターンもあります。同じ記号を使った構文は、入れ子にすることができません。例えば、太字の構文と、重要性の構文は互いに入れ子にすることができません。
+
+{{figure
+= Input
+{{code :: karas
+**This text has ***strong importance***.**
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<b>This text has </b>*strong importance<b>*.</b>
+}}
+}}
+
+また、次のような構文が互い違いになっているテキストは書くことができません。
+
+{{figure
+= Input
+{{code :: karas
+**// Bold and italic text **//
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<b>// Bold and italic text</b>//
+}}
+}}
+
+
+
+
+
+== 特別なネスト :: specialnest
+
+終了と開始が異なる記号を持つ構文はネストすることができます。リンク、インライングループ、ブロックグループは、ネストすることができます。
+
+
+
+
+
+=== リンクのネスト :: nestedlink
+
+リンクはネストすることができます。例えば、次の例は画像や動画にリンクを持たせています。
+
+{{figure
+= Input
+{{code :: karas
+((URL::(((ImageURL.jpg)))))
+((URL::(((VideoURL.mp4)))))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<a href="URL"><img src="ImageURL.jpg" alt="ImageURL.jpg"></a>
+<a href="URL"><video src="VideoURL.mp4…</video></a>
+}}
+}}
+
+また、リンクのURLと、メディアのURLが同じ時は、次のように書きます。
+
+{{figure
+= Input
+{{code :: karas
+(((((ImageURL.jpg)))))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<a href="ImageURL.jpg"><img src="ImageURL.jpg" alt="ImageURL.jpg"></a>
+}}
+}}
+
+誤ったネストを書かないでください。ふつう、メディアの中にリンクを持たせることはできません。誤った構造のテキストが出力されます。
+
+{{figure
+= Input
+{{code :: karas
+(((MediaURL :: ((URL)))))
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<img src="ImageURL.jpg" alt="ImageURL.jpg" <a href="URL">URL</a>>
+}}
+}}
+
+
+
+
+
+=== インライングループのネスト :: nestedigroup
+
+インライングループもネストすることができます。 // id // グループの中に // class // グループを入れたり、その逆もできます。
+
+{{figure
+= Input
+{{code :: karas
+<<smplcls::cls grp <<smplcls::cls grp in cls grp>>>>
+<<<smplid::id grp <<smplcls::cls grp in id grp>>>>>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<span class="smplcls">cls grp <span class="smplcls">cls grp in cls grp</span></span>
+<span id="smplid">id grp <span class="smplcls">cls grp in id grp</span></span>
+}}
+}}
+
+3つ以上の ``` < ``` と ``` > ``` を持つインライングループは、 // id // グループになります。
+
+{{figure
+= Input
+{{code :: karas
+<<<<<sampleid :: id group>>>>>
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<span id="sampleid">id group</span>
+}}
+}}
+
+
+
+
+
+=== ブロックグループのネスト :: nestedbgroup
+
+ブロックグループの中に、ブロックグループを書くことができます。
+
+{{figure
+= Input
+{{code :: karas
+{{parentgroup 
+Contents in parent group.
+{{childgroup
+Contents in child group.
+}}
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<div class="parentgroup">
+<p>Contents in parent group.</p>
+<div class="childgroup">
+<p>Contents in child group.</p>
+</div>
+</div>
+}}
+}}
+
+ただし // pre //, // code //, // kbd //, // samp // グループの中に、ブロックグループを入れることはできません。ブロックグループの構文は変換されません。
+
+{{figure
+= Input
+{{code :: karas
+{{code
+{{childgroup 
+Contents in child group.
+}}
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<code>
+{{childgroup
+Contents in child group.
+}}
+</code>
+}}
+}}
+
+
+
+
+
+== リンク付きの注釈と脚注 :: footnote
+
+多くの軽量マークアップ言語やそれを使うシステムは、脚注 (Footnote) のための構文を持っていますが、KARAS は持っていません。しかしながら、インライングループとリンクの構文を使うことで、リンク付きの (脚注のような) 注釈を出力することができます。
+
+{{figure
+= Input
+{{code :: karas
+KARAS ''((#fn1::*1))'' is lightweight markup language.
+
+Some paragraphs...
+
+<<<fn1::*1>>> Footnote text.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+KARAS <sup><a href="#fn1">*1</a></sup> is lightweight markup language.
+
+Some paragraphs...
+
+<span id="fn1">*1</span> Footnote text.
+}}
+}}
+
+
+
+
+
+== cite は blockquote に入れない :: citeandbq
+
+//Blockquote// はその内容が引用されたものであることを示すために使われるべきです。したがって //blockquote// の中にある //cite// 要素は、引用された //cite// 要素を示すべきであると私は考えています。
+
+もしも // cite // 要素 (あるいは引用元の URL) と // blockquote // 要素を1つのグループにしたいときは、ブロックグループ構文を使います。例えば、次のように書きます。文字列 "blockquote" はブロックグループ構文が予約する名前ではありませんから、// div // 要素のクラス名になります。あるいは、単に "quote" と名前を付けることもできます。
+
+{{figure
+= Input
+{{code :: karas
+{{blockquote
+> This is quote text.
+@@Title@@
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<div class="blockquote">
+<blockquote>
+<p>This is quote text.</p>
+</blockquote>
+<cite>Title</cite>
+</div>
+}}
+}}
+
+
+
+
+
+== 引用テキストに引用記号は書かない :: quotemark
+
+``` \"\" ``` で閉じらてたテキストは引用テキストになりますが、その中に ``` \" ```, ``` \' ```, ``` \<\<\>\> ``` などの引用記号を書く必要はありません。多くのユーザーエージェント (ブラウザ) は引用記号を自動で挿入します。例えば次のようなテキストは誤りです。
+
+{{figure
+= Input
+{{code :: karas
+"" "This is quoted text." ""
+}}
+}}
+
+{{figure
+= On user agent
+{{code :: text
+""This is quoted text.""
+}}
+}}
+
+ただし KARAS のコンバータによって出力される結果が HTML 以外のフォーマットであるときはこの限りではありません。また、一部のユーザーエージェントがこのような機能に対応していないかもしれません。

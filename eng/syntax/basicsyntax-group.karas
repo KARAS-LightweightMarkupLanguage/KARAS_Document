@@ -1,0 +1,394 @@
+= Basic Syntax - Group :: groupsyntax
+
+##
+このページでは KARAS のグループ構文について説明します。
+##
+
+This page describe the group syntax of KARAS.
+
+[[[toc::2]]]
+
+
+
+
+
+== Inline group ##インライングループ## :: inlinegroup
+
+##
+** インライングループ構文は、ある文章や単語をグループにするための構文です。 ** (言い換えれば // span // 要素によって閉じるための構文です。) テキストを ``` << ``` と ``` >> ``` によって閉じると、インライングループになります。
+##
+
+** Inline group syntax is the syntax to group some text or words. ** (In other words, syntax to close the text with // span // element.)
+Text closed with ``` << ``` and ``` >> ``` becomes inline group.
+
+
+{{figure
+= Input
+{{code :: karas
+<<Sample>> text.
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+ <span>Sample</span> text.
+}}
+}}
+
+##
+インライングループは、オプションの構文 ``` :: ``` を使って、名前をつけることができます。インライングループ構文の最大レベルは2です。レベル1では // class // グループとして出力されます。レベル2では // id // グループとして出力されます。ふつうは、必ずグループ名を付け、 // id // はあるドキュメントの中で一意に定められるべきです。
+##
+
+Inline group enable to add the name with option syntax ``` :: ```. The maximum level of inline group is 2. ** In level 1, outputs // class // group. And in level 2, outputs // id // group. Usually group has name, and the id should be uniquely defined in the document.
+
+
+{{figure
+= Input
+{{code :: karas
+<<group::Sample>> text.
+<<<group::Sample>>> text.
+}}
+}}
+
+
+{{figure
+= Output
+{{code :: html
+<span class="group">Sample</span> text.
+<span id="group">Sample</span> text.
+}}
+}}
+
+
+
+
+
+== Block group ##ブロックグループ## :: blockgroup
+
+##
+** ブロックグループ構文は、見出し・リスト・テーブル・テキストなどのあらゆる要素をグループにするための構文です。** (言い換えれば、 // div // 要素によって閉じるための構文です。) 行頭に ``` {{ ``` を書くとグループの開始位置となります。行頭に ``` }} ``` を書くとグループの終了位置となります。グループの開始位置と終了位置の間にある見出しやテキストがグループとなります。
+##
+
+** Block group syntax is the syntax to group everything like heading, list, table, text or the other. ** (In other words, syntax to close the text with // div // element or the other.) When write a ``` {{ ``` at the beginning of the line, it becomes the start of the group. And, when write a ``` }} ``` at the beginning of the line, it becomes the end of the group. Heading, text, and the others between start and end will be grouped.
+
+{{figure
+= Input
+{{code :: karas
+{{
+ = Heading
+ 
+ Some paragraphs. 
+ 
+ - Some lists.
+ -- 2nd item.
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<div>
+<h1>Heading</h1>
+<p>Some paragraphs</p>
+<ul>
+<li> Some lists.
+<ul><li>2nd item.</li></ul>
+</li>
+</ul>
+</div>
+}}
+}}
+
+
+
+
+
+=== Named group ##名前付きのグループ## :: namedgroup
+
+##
+グループには名前をつけることができます。グループの開始位置を表す構文 ``` {{ ``` に続いて書かれたテキストは、グループの名前となります。言い換えれば // div // 要素のクラス名となります。グループ名は改行することができない点に注意してください。
+##
+
+Following text after the syntax of the block group start ``` {{ ``` becomes group name. (In other words, it becomes class name of div element.) Note, the group name cannot break the line.
+
+{{figure
+= Input
+{{code :: karas
+{{groupname
+Contents in group.
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<div class="groupname">
+<p>Contents in group.</p>
+</div>
+}}
+}}
+
+
+
+
+
+=== Special group ##特別なグループ## :: specialgroup
+
+##
+次のいくつかの名前は、グループ名として使うことができません。それらの名前をつけるとき、グループは特別なグループになります。
+##
+
+Following names cannot use as group name. When these names are set, the group becomes special group.
+
+{{note
+##
+言い換えれば、その名前の HTML 要素になります。グループが示す内容についての詳細が必要なときは、HTML に関するドキュメントを読むことを推奨します。
+##
+
+In other words, the group becomes that name element. If you need more information about these group, please search and read document about HTML element.
+}}
+
+{{figure :: table
+!|div     || Nothing have special mean. ##特別な意味を持たないグループ。##
+!|header  || Represent header of contents. ##あるドキュメントのヘッダを表すグループ。##
+!|footer  || Represent footer of contents. ##あるドキュメントのフッタを表すグループ。##
+!|nav     || Represent menu or structure of contents. ##メニューや構成などを表すグループ。##
+!|article || Represent article. (same topic contents). ##まとまった記事であることを示すグループ##
+!|section || Represent section (smaller than article). ##ある内容のまとまりであることを示すグループ。##
+!|aside   || Represent not main subject. ##本題とは異なる内容であることを示すグループ。##
+!|address || Represent author info of contents. ##あるコンテンツの著者に関する情報を示すグループ。##
+!|details || Repesent additional info, detail info. ##追加の情報を表すグループ。##
+!|figure  || Represent figure, table.##図表を表すグループ。##
+!|pre     || Reperesent preformatted contents.##整形済みの内容を表すグループ。##
+!|code    || Represent source code or path. ##ソースコードやパスなどを表すグループ。##
+!|kbd     || Represent user input. ##ユーザのあらゆる入力を表すグループ。##
+!|samp    || Reperesent output. Like sample. ##コンピュータなどの出力結果を表すグループ。##
+}}
+
+##
+例えば、 "header" という名前をつけたときは、 // header // 要素が出力されます。
+##
+
+For example, the group named 'header' is output as // header // element.
+
+{{figure
+= Input
+{{code :: karas
+{{header
+Contents in header.
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<header>
+Contents in header.
+</header>
+}}
+}}
+
+##
+// header // にグループ名をつけるときはオプションのための記号 ``` :: ``` を書いて、後に続けてグループ名を書きます。
+##
+
+In order to add the name to // header // group, use option syntax ``` :: ```. The following text becomes the group name.
+
+{{figure
+= Input
+{{code :: karas
+{{header::groupname
+Contents in header.
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<header class="groupname">
+Contents in header.
+</header>
+}}
+}}
+
+##
+// div // グループに "header" という名前 (クラス名) をつけるときは、グループ名を "div" として、 オプションとして "header" を追加します。
+##
+
+In order to name 'header' to the // div // group, use 'div' as group name, and add the 'header' as option.
+
+{{figure
+= Input
+{{code :: karas
+{{div::header
+Contents in div group.
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<div class="header">
+Contents in div group.
+</div>
+}}
+}}
+
+
+
+
+
+=== // figure //, // details // group :: figuredetails
+
+##
+// figure // と // details // グループは、特別な機能を持っています。 // figure // グループ内に書かれた見出しの構文 ``` = ``` は、// figcaption // (図の見出し)として出力されます。見出しの構文を書く位置は、 // figure // グループ内のどこでもよいです。しかしながら、一般には、 // figure // グループの一番上か一番下に書きます。
+##
+
+// figure // and // details // group have a special function. Heading syntax ``` = ``` in // figure // group is output as // figcaption //. You can write heading syntax at anywhere in the // figure // group. However, usually at the top or bottom of // figure // group.
+
+{{figure
+= Input
+{{code :: karas
+{{figure
+= Caption text.
+
+!|table head || table item
+!|table head || table item
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<figure>
+<figcaption>Caption text.</figcaption>
+<table>
+<tr><th>table head</th><td>table item</td></tr>
+<tr><th>table head</th><td>table item</td></tr>
+</table> 
+</figure>
+}}
+}}
+
+##
+// detalis // グループ内に書かれた見出しの構文 ``` = ``` は // summary // (要約)として出力されます。
+見出しの構文を書く位置は、 // details // グループ内のどこでもよいです。しかしながら、一般には、 // details // グループの一番上に書きます。
+##
+
+Heading syntax ``` = ``` in // details // group is output as // summary //. You can write heading syntax at anywhere in the // details // group. However, usually at the top of // details // group.
+
+{{figure
+= Input
+{{code :: karas
+{{details
+= Summary text.
+ 
+;detail-1
+;;More detail.
+;detail-2
+;;more detail.
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<details>
+<summary>Summary text.</summary>
+<dl>
+<dt>detail-1</dt>
+<dd>More details.</dd>
+<dt>detail-2</dt>
+<dd>More details.</dd>
+</dl>
+</details>
+}}
+}}
+
+
+
+
+
+=== // pre //, // code //, // kbd //, // samp // group :: precodekbdsamp
+
+##
+// pre //, // code //, // kbd //, // samp // グループは、特別な機能を持つグループです。これらのグループ内にあるテキストは、改行するための構文 ``` ~ ``` を使わなくても、そのまま改行されます。また、テキストに含まれる KARAS の構文は変換されず、 // &lt; // や // &gt; // などの特定の文字は文字参照に変換されます。
+##
+
+// pre //, // code //, // kbd //, and // samp //, group have a special function. Text in these group enable to break the line without using syntax ``` ~ ``` to linebreak. In addition, KARAS syntax in the text is not converted, and the special marks like // &lt; // or // &gt; // are convert to the character reference.
+
+{{figure
+= Input
+{{code :: karas
+{{pre
+Preformatted text.
+2nd line.
+<tag>Text in tag.</tag>
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<pre>
+Preformatted text.
+2nd line.
+&lt;tag&gt;Text in tag.&lt;/tag&gt;
+</pre>
+}}
+}}
+
+##
+// code //, // kbd //, // samp // グループの出力は、 // pre // グループ(要素)が合わせて出力されます。オプションで追加したグループ名 (class名) は、 // pre // と // code // (// kbd //, // samp //) の両方に追加されます。
+##
+
+//code//, //kbd// and //sample// group is output along with //pre// group(element). Group name added as option added to the both //pre// and //code// (//kbd//, //samp//) group.
+
+{{figure
+= Input
+{{code :: karas
+{{code :: lang-c
+int main()
+{
+    printf("Unyalder!");
+    return 0;
+}
+}}
+ 
+{{samp :: terminal
+$echo Unyalder!
+Unyalder!
+}}
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<pre class="lang-c">
+<code class="lang-c">
+int main()
+{
+    printf("Unyalder!");
+    return 0;
+}
+</code>
+</pre>
+
+<pre class="terminal">
+<samp class="terminal">
+$echo Unyalder!
+Unyalder!
+</samp>
+</pre>
+}}
+}}

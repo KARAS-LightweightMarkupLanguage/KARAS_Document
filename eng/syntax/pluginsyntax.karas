@@ -1,0 +1,183 @@
+= Plugin Syntax
+
+##
+KARAS は、標準的な構文とは別に、特別な構文を持っています。それらの構文は"プラグイン構文"と呼びます。プラグイン構文はマークアップのためではない、特別な機能を実行することができます。
+##
+
+KARAS has a special syntax different from basic syntax. These syntax are called 'Plugin Syntax'. Plugin syntax enable to do special functions not to markup.
+
+
+{{note
+##
+プラグイン構文は、そのプラグインが導入されたシステム (KARAS) でなければ使うことができません。
+##
+
+Plugin syntax is enabled only on the system which has the plugin.
+
+}}
+
+[[[toc::2]]]
+
+
+
+
+
+== Description :: description
+
+##
+プラグイン構文はテキストを ``` \[\[ ``` と ``` \]\] ``` で閉じます。プラグイン構文には2つの種類があります。レベル1のプラグイン構文は"コンバート型 (Convert type)" と呼ばれます。そして、レベル2のプラグイン構文は"アクション型 (Action type)"と呼ばれます。
+##
+
+In order to write a plugin syntax, enclose the text with ```\[\[``` and ```\]\]. Plugin syntax has 2 types. Level 1 plugin syntax is called 'Convert type'. And level 2 plugin syntax is called 'Action type'.
+
+; ** Convert type plugin (Level1) **
+;; <pre class="karas"><code class="karas">[[ PluginName :: option1 :: option2... :: markedupText]]</code></pre>
+; ** Action type plugin (Level2) **
+;; <pre class="karas"><code class="karas">[[[ PluginName :: option1 :: option2...]]]</code></pre>
+
+##
+プラグイン構文を使うときは、1つ目のオプションにプラグイン名を指定します。プラグイン名は大文字であるか小文字であるかを考慮しません。オプションは、``` \:\: ``` で区切られます。指定したプラグイン名によって、処理の内容が変わります。
+##
+
+In order to use plugin syntax, specify the name with ignore case at the first option. Each option is separated with ```\:\:```. By plugin name that you specified, the the process will change. 
+
+##
+コンバート型のプラグインは、ある本文テキストを装飾したり、変換したりするために使います。例えば、他のフォーマットで書かれたテキストを変換するために使うことができます。コンバート型のプラグインでは、変換するテキストは、オプションの最後に指定する必要があります。
+##
+
+Convert type plugin is used to decorate or convert the text. For example, to convert the text written in other format. In convert type plugin,convert text must be specified as the last option.
+
+##
+アクション型のプラグインは、そのテキストの全ての内容を使った結果を得るために使います。例えば、目次 // TOC // (Table Of Contents) のために使います。あるいは、システムに命令を出すために使うことができます。例えば、コメント欄を挿入したり、ページを非公開にしたりするために使うことができます。
+##
+
+Action type plugin is used to get the result which using all of the text. For example, to get the TOC(Table of Contents).
+Or, you can use it in order to command the system. For example, to insert comment field, or to hide the page. 
+
+
+
+
+
+== Sample plugin :: sampleplugin
+
+##
+KARAS の標準のコンバータに含まれるいくつかのプラグインについて解説します。
+##
+
+In here, describe about the plugin in default KARAS converter.
+
+
+
+
+
+=== NowEditiong :: nowediting
+
+##
+//NowEditing// プラグインは、テキストを出力から削除して、代わりに、 "Now Editing" のテキストを表示するプラグインです。 レベル1 (Convert type) では、オプションとして指定されたテキストを削除します。レベル2 (Action type) では、そのページのすべてのテキストを削除します。
+##
+
+//NowEditing// plugin is the plugin to remove the text and insert "Now Editing". In level 1(Convert type), it remove the text specified as option. In level 2(Action type), all of the text is removed from the result.
+
+{{figure
+= Input
+{{code :: karas
+[[nowediting :: sample text.]]
+[[[nowediting]]]
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<b> Now Editing. </b>
+<p><span style=\"font-size:300%;\"><b> Now Editing. </b></span></p>
+}}
+}}
+
+
+
+
+=== Mark :: mark
+
+##
+//Mark// プラグインは、指定したテキストを // Mark // タグで閉じるプラグインです。 //Mark// プラグインはレベル1 (Convert type) の構文しか持ちません。レベル2 (Action type) として実行すると、エラーテキストを返します。 オプションを2つ指定するとき、1つ目のオプションにマークアップする色を指定することができます。
+##
+
+//Mark// plugin is the plugin to enclose the text with //Mark// tag. //Mark// plugin only has level 1 syntax(Convert type). If used as level 2(Action type), it returns error text. You can specify the markup color as 1st option, when there are 2 options.
+
+{{note
+##
+KARAS は //Mark// 要素を出力するための構文を持っていません。
+##
+
+KARAS has no syntax to output //Mark// element.
+
+}}
+
+{{figure
+= Input
+{{code :: karas
+[[mark :: markedup text.]]
+[[mark :: red :: markedup text.]]
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<mark>markedupText</mark>
+<mark style="background-color:red;">markedupText</mark>
+}}
+}}
+
+
+
+
+
+=== TOC (Table Of Contents) :: tableofc
+
+##
+//TOC// プラグインは、ページに含まれる見出しをリストにして出力するプラグインです。 //TOC// プラグインはレベル2 (Action type) しか持ちません。レベル1 (Convert type) として実行すると、エラーテキストを返します。1つ目のオプションに、リストにする見出しの最小レベルを指定することができます。例えば、"2" を指定するとき、レベル1の見出しは出力されるリストに含まれません。また、2つ目のオプションとして、リストにする見出しの最大レベルを指定することができます。例えば、 "3" を指定するとき、レベル 4, 5, 6 の見出しはリストに含まれません。
+##
+
+//TOC// plugin is the plugin to output the heading list in the page. //TOC// plugin only has level 2 syntax(Action type). If used as level 1(Convert type), it returns error text. You can specify the minimum level of listed headings as 1st option. For example, if set '2' as 1st option, level 1 headings will be not included in the output list. You can also specify the maximum level of listed headings as 2nd option. For example, if set '3' as 2nd option, level 4,5,6 headings will be not included in the output list.
+
+{{figure
+= Input
+{{code :: karas
+= Level1
+== Level2
+=== Level3 :: idoption
+==== Level4
+
+[[[toc]]]
+
+[[[toc::2::3]]]
+}}
+}}
+
+{{figure
+= Output
+{{code :: html
+<h1>Level1</h1>
+<h2 id="idoption">Level2</h2>
+<h3>Level3</h3>
+<h4>Level4</h4>
+
+<ul>
+<li>Level1
+	<ul><li>Level2
+		<ul><li><a href="#idoption">Level3</a>
+			<ul><li>Level4</li></ul>
+		</li></ul>
+	</li></ul>
+</li>
+</ul>
+
+<ul>
+<li>Level2
+<ul><li><a href="#idoption">Level3</a></li></ul>
+</li>
+</ul>
+}}
+}}

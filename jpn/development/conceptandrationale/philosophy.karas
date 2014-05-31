@@ -1,0 +1,149 @@
+= Philosophy :: philosophy
+
+KARAS の設計方針とは別の、抽象的な考えについて解説しています。
+
+[[[toc :: 2]]]
+
+
+
+
+
+== 設計理由、思想は明示するべきである :: havetoshow
+
+どんなに小さなプロダクトでもオープンソースプロダクトでは設計理由や思想を示すことは重要であると考えています。理由はいくつかあります。
+
+1つは同じようなプロダクトの増殖を防ぐためです。これはライセンスの増殖と同じです。増殖を防ぐためには、多くのユーザに設計理由、思想を明示して、それに賛同してもらう必要があります。また理由を示すことで、設計についてより具体的な議論をすることができます。
+
+もう1つの理由は、1つ目に関連します。将来的に、より良いプロダクトを発生させるためです。プロダクトの良い点を新たなプロダクトに採用することができます。将来的にコンピュータができることが増えれば、今あるプロダクトだけでは対応できなくなることは明らかです。新たなプロダクトを作るために、過去にあるプロダクトの開発の経緯を知ることは重要です。過去のプロダクトが失敗したことを、繰り返すことは良くありません。
+
+
+
+
+
+=== 示すべき設計理由 :: mustrationale
+
+WHATWG が ""((http://wiki.whatwg.org/wiki/FAQ#Is_design_rationale_documented.3F :: Is design rationale documented?))"" で述べているように、すべての議論や検討、設計理由を明記することはとても大変で、またその資料は膨大に膨れ上がってしまいます。このことは確かに正しいです。ただし、少なくても、その設計に決定することになった最も大きな理由については示すべきです。
+
+
+
+
+
+== Markdown や reStructuredText は素晴らしいが十分でない :: markandrest
+
+Markdown や reStructuredText は素晴らしい発明です。特に Markdown は日常的な習慣の中で使われる記号を用いているので、ある種のインターフェースとしてとても優れていると思います。しかし私にとって Markdown では機能が足りず、reStructuredText は複雑すぎました。他にも textlie などの有名な軽量マークアップ言語はみましたが、どれも私が納得するものではありませんでした。
+
+唯一 SkrivML だけが私と似た思想、理念で設計されていることが分かりましたが、それでも、私は満足しませんでした。私は私のアイデアが素晴らしいものだと信じて KARAS を開発しました。
+
+※実際には多くの場合は Markdown で十分でしょう。私もそう思うことがあります。そして Markdown の最も素晴らしい点は、その名前だと私は思います。
+
+
+
+
+
+== LML and PDL :: lmlandpdl
+
+LML と PDL(Page Description Language) のまとめです。いくつかのページは日本語のページです。また、((http://en.wikipedia.org/wiki/Lightweight_markup_language :: Wikipedia のページ - Lightweight markup language)) に関連する情報が良くまとめられています。
+
+- ((http://www.maplefish.com/todd/aft-refman.html :: Almost Free Text))
+- ((http://asciidoc.org/ :: AsciiDoc))
+- ((http://en.wikipedia.org/wiki/BBCode :: BBCode))
+- ((http://angg.twu.net/blogme.html :: BlogMe))
+- ((http://www.wikicreole.org/wiki/CheatSheet :: CREOLE))
+- ((https://www.dokuwiki.org/ja:syntax :: DokuWiki))
+- ((http://ja.wikipedia.org/wiki/Ghostscript :: Ghostscript))
+- ((http://hatenadiary.g.hatena.ne.jp/keyword/%E3%81%AF%E3%81%A6%E3%81%AA%E8%A8%98%E6%B3%95%E4%B8%80%E8%A6%A7 :: (JPN) Hatena))
+- ((http://ja.wikipedia.org/wiki/Markdown :: Markdown))
+- ((http://www.mediawiki.org/wiki/Help:Formatting :: Mediawiki))
+- ((http://perldoc.perl.org/perlpod.html :: PlainOldDocumentation))
+- ((http://www.asahi-net.or.jp/~vw4k-kbys/plain2/plain2.html :: (JPN) plain2))
+-- ((http://www.jaist.ac.jp/~k-chinen/pg/plain2/eng/plain2-readme.eng.html :: (ENG) plain2))
+- ((http://ja.wikipedia.org/wiki/PostScript :: PostScript))
+- ((http://pukiwiki.sourceforge.jp/ :: (JPN) Pukiwiki))
+- ((http://docutils.sourceforge.net/rst.html :: reStructuredText))
+- ((https://github.com/kmuto/review/blob/master/doc/format.rdoc :: (JPN) Re:VIEW))
+- ((http://markup.skriv.org/ :: SkrivML))
+- ((http://redcloth.org/hobix.com/textile/ :: textile))
+- ((http://epydoc.sourceforge.net/manual-epytext.html :: The Epytext Markup Language))
+- ((http://ulmul.rubyforge.org/ :: ULMUL))
+- ((http://ja.wikipedia.org/wiki/XML_Paper_Specification :: XML Paper Specification))
+
+
+
+
+
+== LML 以外に参考にしたもの :: otherref
+
+KARAS の構文を設計するために LML を参考にするのは当然ですが、プログラミング言語や正規表現も参考にしています。
+
+また、KARAS を使って、どのようなテキストやドキュメントを書けるか、十分に検討しました。そのために、学術論文、新聞・お菓子や薬のパッケージ、ダイレクトメール、小説、辞書などを観察しました。HTML や CSS を使ってレイアウトすることが難しい(テクニックが必要)パターンを除いて、多くのドキュメントの制作のために使うことができるように注意しました。
+
+もしかすると KARAS の機能は十分ではありませんが、機能が多いと、取扱説明書は更に複雑で長くなります。またもしもそのような広い範囲に対応ができるようなシステムが必要なら、HTML を使えば良いと考えています。
+
+
+
+
+
+==  セマンティックWebのような設計思考は、(遠い)将来に排除されるべきである :: semanticweb
+
+セマンティックWebの概念は残るでしょう。しかしながら、テキストとして記述された内容、あるいはその一部が、どのような性質や情報を示すかを、コンピュータが自動で識別し、分類できるようになることが、この分野の究極的な目標であるべきだと私は考えています。そして将来そうなることを期待しています。そのようなシステムのユーザは、KARAS のようにテキストの持つ意味を入力しなくて良くなり、現状よりも更に自然にドキュメントを書くことができるようになるでしょう。KARAS はそのような未来が来るときまで使うことができれば良いです。
+
+とは言え、ドキュメントを目で見て認識して利用するのは我々人間です。したがって文章やそのブロックを分かり易く記述する手法はしばらくの間はなくなることはないでしょう。また HTML のようなテキストに意味を持たせるためのフォーマットも、コンピュータがドキュメントを識別した結果を保存したりするために、しばらくの間はなくなることがないでしょう。
+
+
+
+
+
+== HTML5 は価値を損ねている :: abouthtml5
+
+HTML5 の記事を多く見かけるようになりました(in 2014)。しかしながら、実際のところ、その内容は Canvas 要素に Javascript や CSS3 を組み合わせたものがほとんどです。新たに定義されたタグや要素は蔑ろにされています。しかし気持ちはよく分かるのです。テキストの意味を考えながら、タグを打つのが凄く面倒だからです。KARAS タグを打つ面倒を取り払って HTML の価値を高めてくれるでしょう。
+
+
+
+
+
+== 出力形式を HTML に限定する必要はない :: outputformat
+
+KARAS は標準的な出力フォーマットを HTML としていますが、これに限らず、あらゆる環境で KARAS の構文を採用しても良いと思います。EPUB や PDF を出力する場合には、HTML を中間言語として、HTML を変換するシステムを作ることが考えられるでしょう。また、必要なら、EPUB や PDF に必要なパラメータは、KARAS の拡張記法によって記述することができます。
+
+
+
+
+
+== HTML に対する私の見解 :: thinkabouthtml
+
+私の HTML に対する見解をここで述べておきます。これらは KARAS を設計するときに考えたものです。私の基本姿勢は、より簡潔に、より分かりやすく、直せるものは直すべきだ、です。これは W3C などの姿勢とは異なります。
+
+- Reference
+-- ((http://www.w3.org/TR/html-design-principles/#priority-of-constituencies :: 3.2. Priority of Constituencies - W3C))
+
+{{note
+次のことに注意してください。私は W3C や WHATWG のグループが行ってきた、議論の記録の一部しか読んでいません。またすべての経緯と貢献者の思いを知っているわけではありません。貢献者の方々には尊敬と感謝の念を持っていますが、ここで述べる問題や意見は、それとは別のレイヤーの問題です。
+}}
+
+
+
+
+
+=== // small // 要素は名前を変更するべき :: aboutsmall
+
+2014年1月現在、HTML5 では、 // small // 要素は、免責事項や注意事項を述べるために使うこと、と推奨されています。この設計は私は間違いであると思います。 // small // という単語から、これらの内容について明らかに推測できないためです。
+
+文字を小さくする目的で、 // small // という単語を使う機会は必ずあるのです。ふつう、特定の文字だけを小さくしようとすると &lt;span class= "small"&gt; を利用するでしょう。このことを考えたとき、 // small // 要素の設計は明らかに誤りであるのだろうと考えました。例えそれが今までの歴史の中で当たり前のように使われていてもです。人間は間違いを正すことができます。
+
+
+
+
+
+=== // cite // 要素は出典を示す要素であるべき :: aboutcite
+
+2014年1月現在、HTML5 では、 // cite // 要素は、作品タイトルなどを述べるために使うこと、と推奨されています。私はこの設計が好きではありません。 // cite // という単語は、本来、// 引用する // という意味を持っているからです。引用するときは、作品であっても人の発言であっても良いはずです。しかし長く続いた(悪しき)習慣に基づき、 // cite // 要素は作品タイトルを示すことはあっても、発言者を示すために使うことができなくなりました。これは非常に残念です。
+
+習慣やデファクトスタンダードに基づきルールを決めることは悪いことではありません。しかしながら、人間は間違いを正すことができることを忘れてはいけません。私は KARAS のユーザが // cite // 要素を、発言者を示すために使うことを希望しています。KARAS では ``` @@ ``` で閉じたテキストを // cite // 要素として出力することができます。また @ をもう1つ増やすと // small // 要素として出力することができます。もしもあなたが私に同調してくれるのなら、発言者を示すために @ を2つ書いて // cite // 要素を出力してください。W3C や WHATWG の見解に従うべきだと思うのであれば、@ を3使いて // small // 要素を出力することができます。あるいは // strong(b) // 要素や // span // 要素を使うべきでしょう。KARAS には // span // 要素を使うためのインライングループという構文も用意されています。
+
+{{note
+2014年1月現在、Twitter のタイムラインの発言者名は // strong // 要素でマークアップされています。Twitter-Bootstrap の // Blockquote // の項目では、 // small // 要素になっていますが。
+}}
+
+- Reference
+-- ((http://wiki.whatwg.org/wiki/Cite_element :: Cite Element - WHATWG))
+-- ((http://wiki.whatwg.org/wiki/FAQ#The_.3Ccite.3E_element_should_allow_names_of_people_to_be_marked_up :: The &lt;cite&gt; element should allow names of people to be marked up - WHATWG))

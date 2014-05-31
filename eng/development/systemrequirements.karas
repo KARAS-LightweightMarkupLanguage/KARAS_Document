@@ -1,0 +1,65 @@
+= System Requirements :: requirements
+
+This page describe the system requirements and recommended condition of KARAS.
+
+[[[toc::2]]]
+
+
+
+
+
+== Character Encoding :: charaencoding
+
+Default converter of KARAS designed to be used under the UTF-8 environment. It does not take the other character encoding into account. Therefore, when introducing default converter of KARAS to the system, needs to set the character encoding to UTF-8. 
+
+Even if the converter works correctly with the other encoding, there is no  guarantee that the converter works same as it in a different environment. Especially, with multi-byte character, it may cause some problems.
+
+
+
+
+
+== Media Link :: medialink
+
+KARAS converter have to convert link syntax which indicate the link to a image, audio and video to the relevant format. Developer of the system which using KARAS have to develop this feature. And, the output result should be shown to the user. Especially, it is more important when the output result is different from default converter.
+
+For example, default converter outputs //video// and //audio// element. You can change the output format to the other which use //Flash//. However, it is necessary to indicate the output result to the user.
+
+Output format of the document which written in KARAS, and the environment for reading it are undefined. For example, it may be EPUB or PDF. Developers have to develop the system able to output a optimized player for each media in each environment.
+
+
+
+
+
+== Security Problem :: security
+
+The standard output format of KARAS is HTML. HTML has features to execute any script such as Javascript. And it also has features to execute external program or page such as //object// element or //iframe// element. In the system that an unknown and unauthorized user can edit a page,  like Wiki, there is a risk that malicious user embed malicious script, url, or tag. Developer of the system introducing KARAS have to be enough careful to this.
+
+When only authorized user uses KARAS, features to insert HTML is very convenient. However, in the system which can be used by an unknown and unauthorized user, it needs sanitization. In here, technical details about sanitization are not described. Also, please be careful to the syntax which has option. For example, link, group, and especially plugin syntax. By using the option, the user is able to embed any code.
+
+
+
+
+
+=== Caution about Plugin :: cautionplugin
+
+You have to be careful when developing and introducing plugins. When the plugin is able to insert any(malicious) code, the developer of the plugin have to show it. When you introduce published plugin, it is better to check whether the plugin outputs malicious code or not. And, when the system can be edit by unauthorized user, you needs to check whether the plugin is able to embed malicious code or not.
+
+
+
+
+
+=== Seculity Hint :: securityhint
+
+When using KARAS with public system like Wiki, for example, following security measure are there. It becomes more stronger when the security level becomes higher.
+
++ Do not allow the user to insert some HTML element.
+-- Escape the HTML text.
+-- Delete the HTML text.
++ Do not allow the user to insert all of the HTML element.
+-- Escape the HTML text.
+-- Delete the HTML text.
++ Do not allow the user to insert all of the link text.
+-- It should include the link text written in KARAS.
+-- Delete a, img, video, object, embed, etc…
+
+Also in addition to these process, the system have to avoid embedding of dangerous text, such as Javascript.
