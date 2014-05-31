@@ -8,7 +8,7 @@
 
 First, let's try KARAS. You can test KARAS on your Web browser right now.
 
-- *** ((./KARAS_Javascript/index.html :: KARAS.js Sandbox)) ***
+- *** ((../KARAS_Javascript/index.html :: KARAS.js Sandbox)) ***
 
 
 {{note
