@@ -1,6 +1,10 @@
 = Philosophy :: philosophy
 
+##
 KARAS の設計方針とは別の、抽象的な考えについて解説しています。
+##
+
+This page describe the abstract policy of KARAS which is different from design policy.
 
 [[[toc :: 2]]]
 
@@ -8,7 +12,7 @@ KARAS の設計方針とは別の、抽象的な考えについて解説して�
 
 
 
-== 設計理由、思想は明示するべきである :: havetoshow
+== Concept and Rationale are have to shown :: havetoshow
 
 どんなに小さなプロダクトでもオープンソースプロダクトでは設計理由や思想を示すことは重要であると考えています。理由はいくつかあります。
 
