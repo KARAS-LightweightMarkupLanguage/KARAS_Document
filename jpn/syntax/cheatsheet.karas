@@ -96,7 +96,7 @@
 {{figure
 = Others
 !| Mark       !< Output
-!| ~\\n       || &lt;b&gt;
+!| ~\\n       || &lt;br&gt;
 !| \#\#       || comment out.
 !| \\         || escape.
 }}

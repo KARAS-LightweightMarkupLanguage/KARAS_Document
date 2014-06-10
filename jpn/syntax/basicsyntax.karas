@@ -576,7 +576,7 @@ $$$ > Sample text $$$
 = Input
 {{code :: karas
 ((( VideoURL.mp4 )))
-((( VideoURL.mp4, width="100" height="100" loop controls )))
+((( VideoURL.mp4 :: width="100" height="100" loop controls )))
 }}
 }}
 

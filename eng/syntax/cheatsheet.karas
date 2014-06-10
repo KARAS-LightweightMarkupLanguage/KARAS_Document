@@ -72,10 +72,6 @@
 !| :::               || &lt;object&gt; 
 !| \:\: // option // || as // alias // or // media option //
 
-##
-メディアの出力形式は拡張子とシステム環境に依存します。
-##
-
 Output format of media depends on the system and the syntax.
 }}
 }}
@@ -100,7 +96,7 @@ Output format of media depends on the system and the syntax.
 {{figure
 = Others
 !| Mark       !< Output
-!| ~\\n       || &lt;b&gt;
+!| ~\\n       || &lt;br&gt;
 !| \#\#       || comment out.
 !| \\         || escape.
 }}
