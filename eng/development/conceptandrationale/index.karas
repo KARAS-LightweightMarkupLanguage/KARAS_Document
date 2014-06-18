@@ -8,16 +8,15 @@ This page describe the concept and rationale of design of KARAS. Especially, whe
 
 == Pages :: pages
 
-I'm sorry but these pages are now draft. I'll translate these page as soon as possible.
+I'm sorry but few pages are now draft. I'll translate these page as soon as possible.
 
-- Philosophy
+- ((./philosophy.html :: Philosophy))
 - Base concept
 - Sytanx design
 - Regarding HTML
 - Unsupported features
 
 ##
-- ((./philosophy.html :: Philosophy))
 - ((./baseconcept.html :: Base concept))
 - ((./syntaxdesign.html :: Sytanx design))
 - ((./regardinghtml.html :: Regarding HTML))

@@ -1,0 +1,214 @@
+= Philosophy :: philosophy
+
+This page describe the abstract policy of KARAS which is different from design policy.
+
+[[[toc :: 2]]]
+
+
+
+
+
+== Concept and Rationale Should be Shown :: havetoshow
+
+Concept and rationale of open source product must be shown, even if it is too small product.
+There are several reasons why.
+
+One is to prevent the similar products proliferation.
+This is same as "//License Proliferation//".
+In order to prevent the proliferation,
+it is necessary to indicate the concept and rationale, and get the many users approval.
+Further, by indicating the rationale, it is possible to discuss more specific about the design.
+
+Another reason is in order to generate a more better product in future.
+The good thing about the product can be employed in a new product.
+Because computer get to be able to handle more things in future,
+it is clear that the current product get to be unable to handle all of it.
+In order to make a new product, it is important to know the history of the development of the same type products.
+And, repeating same mistake is not good.
+
+
+
+
+
+=== A Rationale to be Indicated :: rationaletbi
+
+As WHATWG described in  ""((http://wiki.whatwg.org/wiki/FAQ#Is_design_rationale_documented.3F :: Is design rationale documented?))"" ,
+indicating all of the discussion, examination, and rationale is too hard,
+and such document will consist of a lot of pages.
+This is certainly true. However, at least, important reason to determine the design should be shown.
+
+
+
+
+
+== Markdown and reStructuredText are Excellent, but not Enough :: markandrest
+
+Markdown and reStructuredText are excellent invention.
+Especially, because Markdown is using popular markup in a day-to-day habit, it is very nice as an interface.
+However, to me, Markdown is not enough, and reStructuredText is too complicated.
+I also checked another famous lightweight markup languages such as textlie, but those were not able to convince me.
+I found that only //SkrivML// has been designed in similar concept and philosophy, still, I was not satisfied.
+I believed that my idea is splendid, and developed KARAS.
+
+{{note
+In many case, Markdown is enough. I think so. And I think the greatest point of Markdown is the name.
+}}
+
+
+
+
+
+== LML and PDL :: lmlandpdl
+
+This is a list of LML and PDL (Page Description Language).
+Several pages is a Japanese page.
+And related information has been well organized in the ((http://en.wikipedia.org/wiki/Lightweight_markup_language :: //Wikipedia - Lightweight markup language//)).
+
+- ((http://www.maplefish.com/todd/aft-refman.html :: Almost Free Text))
+- ((http://asciidoc.org/ :: AsciiDoc))
+- ((http://en.wikipedia.org/wiki/BBCode :: BBCode))
+- ((http://angg.twu.net/blogme.html :: BlogMe))
+- ((http://www.wikicreole.org/wiki/CheatSheet :: CREOLE))
+- ((https://www.dokuwiki.org/ja:syntax :: DokuWiki))
+- ((http://ja.wikipedia.org/wiki/Ghostscript :: Ghostscript))
+- ((http://hatenadiary.g.hatena.ne.jp/keyword/%E3%81%AF%E3%81%A6%E3%81%AA%E8%A8%98%E6%B3%95%E4%B8%80%E8%A6%A7 :: (JPN) Hatena))
+- ((http://ja.wikipedia.org/wiki/Markdown :: Markdown))
+- ((http://www.mediawiki.org/wiki/Help:Formatting :: Mediawiki))
+- ((http://perldoc.perl.org/perlpod.html :: PlainOldDocumentation))
+- ((http://www.asahi-net.or.jp/~vw4k-kbys/plain2/plain2.html :: (JPN) plain2))
+-- ((http://www.jaist.ac.jp/~k-chinen/pg/plain2/eng/plain2-readme.eng.html :: (ENG) plain2))
+- ((http://ja.wikipedia.org/wiki/PostScript :: PostScript))
+- ((http://pukiwiki.sourceforge.jp/ :: (JPN) Pukiwiki))
+- ((http://docutils.sourceforge.net/rst.html :: reStructuredText))
+- ((https://github.com/kmuto/review/blob/master/doc/format.rdoc :: (JPN) Re:VIEW))
+- ((http://markup.skriv.org/ :: SkrivML))
+- ((http://redcloth.org/hobix.com/textile/ :: textile))
+- ((http://epydoc.sourceforge.net/manual-epytext.html :: The Epytext Markup Language))
+- ((http://ulmul.rubyforge.org/ :: ULMUL))
+- ((http://ja.wikipedia.org/wiki/XML_Paper_Specification :: XML Paper Specification))
+
+
+
+
+
+== Reference other than LML :: refotherlml
+
+In order to design the syntax of KARAS, to refer to LMLs is obvious.
+KARAS also refers to programming languages and regular expression.
+
+And, I considered what kind of text and document could be written by using KARAS.
+I checked academic papers, news papers, packages of medicine and snack,
+direct mail, novel, dictionary and others.
+Except for the difficult pattern that to be lay out by using HTML and CSS,
+KARAS is able to write many kinds of documents.
+
+Possibly, functions of the KARAS is not enough.
+But if there are more functions, it becomes more complex.
+When need such wide range system, we should use HTML without creating a new language.
+And if needed, KARAS is able to extend the system by using Plugin syntax.
+
+
+
+
+
+== Design concept such as Semantic Web should be eliminated in the distant future :: semanticweb
+
+Concept of the Semantic Web will remain for a long time.
+However, I think automatically identifying and classifying the information or property that shown in a text, is ultimate goal of this field.
+And I hope it is realized in the future.
+
+Such system user will not have to enter the meaning of the text like LML does,
+and can write the document more naturally than now.
+I wish KARAS is possible to use until such future will come.
+
+However, there is no change that human detect and utilize the document with their eyes.
+Therefore, markup technique to make the text and the block clearly will not disappear for a while.
+Also format to provide meaningful text such as HTML will never gone,
+in order to save the result of analysis of document.
+
+
+
+
+
+== HTML5 impairing the Value :: abouthtml5
+
+Now we can see a lot of articles of HTML5 (in 2014).
+However, in truth, most of the contents show about canvas element or combination of Javascript and CSS3.
+Newly defined element has been neglected. But I know the feeling well.
+Hit the tag with thinking the meaning of the text is very bothersome.
+KARAS will beat the bothersome and increase the value of HTML.
+
+
+
+
+== Need not be limited to HTML :: outputformat
+
+KARAS has an HTML as standard output format, but not only this, you can employed KARAS syntax in any environment.
+When you need EPUB or PDF, regard the HTML as intermediate format, to convert by existing tool is one of idea.
+Of course, developing the dedicated converter is also good.
+You can write the parameter that important to EPUB or PDF with plugin syntax of KARAS if you need.
+
+
+
+== My thinkink about HTML :: thinkabouthtml
+
+I would like to mention my thinking about HTML in here.
+These were considered when designing the KARAS.
+My basic stance is this. To be simple, to be easy, and mistakes should be fixed.
+This is different from W3C or any others.
+
+- Reference
+-- ((http://www.w3.org/TR/html-design-principles/#priority-of-constituencies :: 3.2. Priority of Constituencies - W3C))
+
+{{note
+Please note the following things.
+I have only read a part of the document which shows record of the discussion WHATWG and W3C has done.
+I don't know about all of the history or contributor's thinking. 
+And, I have a gratitude and respect to the contributors.
+}}
+
+
+
+
+
+=== //small// Element should be Renamed :: aboutsmall
+
+In 2014 Jan., In HTML5, //small// element is defined that it should be used to mention disclaimer or note.
+I think this design is wrong. Because we can not guess this rule from the name of //small//.
+
+In order to write small text, we often use a word //small//.
+In generally, to make a part of text small, we will use &lt;span class= "small"&gt;.
+When I thought about this, I felt that the design of //small// element is clearly wrong.
+Even if it is still used in a history. 
+
+
+
+
+
+=== //cite// Element should be used to Indicate a Source :: aboutcite
+
+In 2014 Jan., In HTML5, //cite// element is defined that it should be used to indicate title of work such as book, paper, or any other.
+I think this design is wrong. Because original meaning of word //cite// is to quote.
+When we quote something, either is fine if it is speech of a person or something work.
+However, based on the long lasted (bad) habit, we can not use //cite// element to indicate a speaker, even it can use to indicate a title.
+This is very disappointing.
+Define the rules on the basis of the habits or de facto standard is not bad.
+However, We must not forget that we can correct mistakes.
+
+I hope that KARAS user use //cite// element to indicate a speaker.
+In KARAS, text enclosed with ```@@``` is outputted as //cite// element.
+In addition, to increase one more @, it is outputted as //small// element.
+
+If you approve of my thinking, please use //cite// element to indicate a speaker, with writing two @ mark.
+If you think that we should take a W3C or WHATWG opinion, you can output //small// element with writing three @ mark.
+Or, you should use //strong(b)// element or //span// element.
+There is a syntax called inline-group to output //span// element in KARAS.
+
+{{note
+In 2014 Jan., speaker of Twitter-timeline is markedup with //strong// element.
+On the other hand, in a Blockquote article of Twitter-Bootstrap, speaker is markedup with //small// element.
+}}
+
+- Reference
+-- ((http://wiki.whatwg.org/wiki/Cite_element :: Cite Element - WHATWG))
+-- ((http://wiki.whatwg.org/wiki/FAQ#The_.3Ccite.3E_element_should_allow_names_of_people_to_be_marked_up :: The &lt;cite&gt; element should allow names of people to be marked up - WHATWG))
