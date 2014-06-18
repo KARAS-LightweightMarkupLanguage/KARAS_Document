@@ -17,7 +17,7 @@ One is to prevent the similar products proliferation.
 This is same as "//License Proliferation//".
 In order to prevent the proliferation,
 it is necessary to indicate the concept and rationale, and get the many users approval.
-Further, by indicating the rationale, it is possible to discuss more specific about the design.
+Further, by indicating the rationale, it becomes possible to discuss more specific about the design.
 
 Another reason is in order to generate a more better product in future.
 The good thing about the product can be employed in a new product.
@@ -111,7 +111,7 @@ And if needed, KARAS is able to extend the system by using Plugin syntax.
 
 
 
-== Design concept such as Semantic Web should be eliminated in the distant future :: semanticweb
+== Design concept such as Semantic Web should be Eliminated in the Distant Future :: semanticweb
 
 Concept of the Semantic Web will remain for a long time.
 However, I think automatically identifying and classifying the information or property that shown in a text, is ultimate goal of this field.
@@ -150,7 +150,7 @@ You can write the parameter that important to EPUB or PDF with plugin syntax of 
 
 
 
-== My thinkink about HTML :: thinkabouthtml
+== My thinking about HTML :: thinkabouthtml
 
 I would like to mention my thinking about HTML in here.
 These were considered when designing the KARAS.

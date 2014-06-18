@@ -11,15 +11,14 @@ These pages provide information for KARAS developers. When implementing KARAS to
 - ((./sourcecode.html :: Source code))
 - ((./plugin.html :: Plugin))
 - ((./conceptandrationale/index.html :: Concept & Rational))
--- I'm sorry but these pages are now draft. I'll translate these page as soon as possible.
--- Philosophy
+-- I'm sorry but few pages are now draft. I'll translate these page as soon as possible.
+-- ((./conceptandrationale/philosophy.html :: Philosophy))
 -- Base concept
 -- Sytanx design
 -- Regarding HTML
 -- Unsupported features
 
 ##
--- ((./conceptandrationale/philosophy.html :: Philosophy))
 -- ((./conceptandrationale/baseconcept.html :: Base concept))
 -- ((./conceptandrationale/syntaxdesign.html :: Sytanx design))
 -- ((./conceptandrationale/regardinghtml.html :: Regarding HTML))
