@@ -1,8 +1,6 @@
-= Update :: update
+= ver. β (2014.10.13)
 
-== 2014.10.13 KARAS β ver.
-
-=== 見出しのレベルを指定するように変更しました。
+== 見出しのレベルを指定するように変更しました。
 
 WordPress などのようなブログシステムを構築するとき、
 あるテキストのタイトルはそのテキストの本文中に書かれないことがあります。
@@ -18,7 +16,7 @@ function convert($text, $pluginDirectory, $startLevelOfHeading)
 ``startLevelOfHeading`` に 2 を指定するとき、```=``` は ```<h2>``` となります。
 
 
-=== Inline Group の構文の挙動が変更されました。
+== Inline Group の構文の挙動が変更されました。
 
 1つだけテキストが書かれた InlineGroup は class あるいは id として出力されます。
 現実的に、class も id も指定しない span 要素は使われません。
@@ -49,7 +47,7 @@ function convert($text, $pluginDirectory, $startLevelOfHeading)
 }}
 
 
-=== Plugin構文と実装方法が変更されました。
+== Plugin 構文と実装方法が変更されました。
 
 オプションではないマークアップされたテキストを示すときは、```:::``` を使います。
 ```:::``` 以降の ``::`` はプラグインのオプションとして見做されません。
@@ -59,16 +57,16 @@ function convert($text, $pluginDirectory, $startLevelOfHeading)
 {{figure
 = Before
 {{code
-[[convert::option1::option2…::markedupText]]
-[[[[action::option1::option2…]]]]
+[[convert::option1::option2 … :: markedupText]]
+[[[[action::option1::option2 …]]]]
 }}
 }}
 
 {{figure
 = After
 {{code
-[[convert::option1::option2・・・・:::markedupText]]
-[[action::option1::option2・・・・:::markedupText]]
+[[convert::option1::option2 … ::: markedupText]]
+[[action::option1::option2 … ::: markedupText]]
 }}
 }}
 
