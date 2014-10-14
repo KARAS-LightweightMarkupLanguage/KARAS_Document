@@ -18,8 +18,6 @@
 
 
 
-
-
 {{column
 {{figure
 = Table markup
@@ -33,8 +31,6 @@
 }}
 
 }}columns
-
-
 
 
 
@@ -60,7 +56,6 @@
 
 
 
-
 {{column
 {{figure
 = Link markup
@@ -80,17 +75,15 @@
 
 
 
-
-
 {{columns
 
 {{column
 {{figure
 = Inline group
 !| Mark                      !< Output
-!| &lt;&lt;/&gt;&gt;         || &lt;span class="option"&gt;
-!| &lt;&lt;&lt;/&gt;&gt;&gt; || &lt;span id="option"&gt;
-!| \:\: // option //         || as // class // or // id //
+!| &lt;&lt;/&gt;&gt;         || &lt;span class=""&gt;
+!| &lt;&lt;&lt;/&gt;&gt;&gt; || &lt;span id=""&gt;
+!| \:\: // option //         || as grouped text
 }}
 
 {{figure
@@ -101,8 +94,6 @@
 !| \\         || escape.
 }}
 }}
-
-
 
 
 

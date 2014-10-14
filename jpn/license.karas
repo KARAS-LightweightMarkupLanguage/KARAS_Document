@@ -1,9 +1,6 @@
 = Author & License :: authorandlicense
 
 
-
-
-
 == Author :: author
 
 KARAS に関するすべてのものは、著作権者 / 開発者に関連する KARAS 以外のあらゆる団体から独立し、一切の関連がないことをここに明記します。
@@ -20,13 +17,7 @@ I'm not good at english. Please guess even if there is wrong (or rude) it.
 }}
 
 
-
-
-
 == License :: license
-
-
-
 
 
 === KARAS :: karaslicense
@@ -64,15 +55,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 }}
 
 
-
-
-
 === Document :: karasdoclicense
 
 ここに公開される KARAS のドキュメントは、** ((http://creativecommons.org/licenses/by/4.0/ :: Creative Commons - Attribution International (CC BY\))) ** で公開されます。
-
-
-
 
 
 === Trademark :: karastmlicense
