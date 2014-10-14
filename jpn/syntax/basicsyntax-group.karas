@@ -6,27 +6,31 @@
 
 
 
-
-
 == インライングループ :: inlinegroup
 
-** インライングループ構文は、ある文章や単語をグループにするための構文です。 ** (言い換えれば // span // 要素によって閉じるための構文です。) テキストを ``` << ``` と ``` >> ``` によって閉じると、インライングループになります。
+** インライングループ構文は、ある文章や単語をグループにするための構文です。 **
+(言い換えれば // span // 要素によって閉じるための構文です。)
+テキストを ``` << ``` と ``` >> ``` によって閉じると、インライングループになります。
+オプションを指定しないときは、空のグループが作成されます。
 
 {{figure
 = Input
 {{code :: karas
-<<Sample>> text.
+<<group>> text.
 }}
 }}
 
 {{figure
 = Output
 {{code :: html
- <span>Sample</span> text.
+<span class="group"></span> text.
 }}
 }}
 
-インライングループは、オプションの構文 ``` :: ``` を使って、名前をつけることができます。インライングループ構文の最大レベルは2です。レベル1では // class // グループとして出力されます。レベル2では // id // グループとして出力されます。ふつうは、必ずグループ名を付け、 // id // はあるドキュメントの中で一意に定められるべきです。
+インライングループはオプションの構文 ``` :: ``` を使ってテキストを追加することができます。
+インライングループ構文の最大レベルは2です。レベル1では // class // グループとして出力されます。
+レベル2では // id // グループとして出力されます。
+ふつうは、必ずグループ名を付け、 // id // はあるドキュメントの中で一意に定められるべきです。
 
 {{figure
 = Input
@@ -47,14 +51,16 @@
 
 
 
-
-
 == ブロックグループ :: blockgroup
 
-** ブロックグループ構文は、見出し・リスト・テーブル・テキストなどのあらゆる要素をグループにするための構文です。** (言い換えれば、 // div // 要素によって閉じるための構文です。) 行頭に ``` {{ ``` を書くとグループの開始位置となります。行頭に ``` }} ``` を書くとグループの終了位置となります。グループの開始位置と終了位置の間にある見出しやテキストがグループとなります。
+** ブロックグループ構文は、見出し・リスト・テーブル・テキストなどのあらゆる要素をグループにするための構文です。** 
+(言い換えれば、 // div // 要素によって閉じるための構文です。)
+行頭に ``` {{ ``` を書くとグループの開始位置となります。行頭に ``` }} ``` を書くとグループの終了位置となります。
+グループの開始位置と終了位置の間にある見出しやテキストがグループとなります。
 
 {{figure
 = Input
+
 {{code :: karas
 {{
  = Heading
@@ -69,6 +75,7 @@
 
 {{figure
 = Output
+
 {{code :: html
 <div>
 <h1>Heading</h1>
@@ -84,14 +91,16 @@
 
 
 
-
-
 === 名前付きのグループ :: namedgroup
 
-グループには名前をつけることができます。グループの開始位置を表す構文 ``` {{ ``` に続いて書かれたテキストは、グループの名前となります。 (言い換えれば // div // 要素のクラス名となります。) グループ名は改行することができない点に注意してください。
+グループには名前をつけることができます。グループの開始位置を表す構文
+``` {{ ``` に続いて書かれたテキストは、グループの名前となります。
+(言い換えれば // div // 要素のクラス名となります。)
+グループ名は改行することができない点に注意してください。
 
 {{figure
 = Input
+
 {{code :: karas
 {{groupname
 Contents in group.
@@ -101,6 +110,7 @@ Contents in group.
 
 {{figure
 = Output
+
 {{code :: html
 <div class="groupname">
 <p>Contents in group.</p>
@@ -110,14 +120,15 @@ Contents in group.
 
 
 
-
-
 === 特別なグループ :: specialgroup
 
-次のいくつかの名前は、グループ名として使うことができません。それらの名前をつけるとき、グループは特別なグループになります。
+次のいくつかの名前は、グループ名として使うことができません。
+それらの名前をつけるとき、グループは特別なグループになります。
 
 {{note
-言い換えれば、その名前の HTML 要素になります。グループが示す内容についての詳細が必要なときは、HTML に関するドキュメントを読むことを推奨します。
+言い換えれば、その名前の HTML 要素になります。
+グループが示す内容についての詳細が必要なときは、
+HTML に関するドキュメントを読むことを推奨します。
 }}
 
 {{figure :: table
@@ -141,6 +152,7 @@ Contents in group.
 
 {{figure
 = Input
+
 {{code :: karas
 {{header
 Contents in header.
@@ -150,6 +162,7 @@ Contents in header.
 
 {{figure
 = Output
+
 {{code :: html
 <header>
 Contents in header.
@@ -161,6 +174,7 @@ Contents in header.
 
 {{figure
 = Input
+
 {{code :: karas
 {{header::groupname
 Contents in header.
@@ -170,6 +184,7 @@ Contents in header.
 
 {{figure
 = Output
+
 {{code :: html
 <header class="groupname">
 Contents in header.
@@ -177,7 +192,8 @@ Contents in header.
 }}
 }}
 
-// div // グループに "header" という名前 (クラス名) をつけるときは、グループ名を "div" として、 オプションとして "header" を追加します。
+// div // グループに "header" という名前 (クラス名) をつけるときは、
+グループ名を "div" として、 オプションとして "header" を追加します。
 
 {{figure
 = Input
@@ -199,14 +215,17 @@ Contents in div group.
 
 
 
-
-
 === // figure //, // details // グループ :: figuredetails
 
-// figure // と // details // グループは、特別な機能を持っています。 // figure // グループ内に書かれた見出しの構文 ``` = ``` は、// figcaption // (図の見出し)として出力されます。見出しの構文を書く位置は、 // figure // グループ内のどこでもよいです。しかしながら、一般には、 // figure // グループの一番上か一番下に書きます。
+// figure // と // details // グループは、特別な機能を持っています。 
+// figure // グループ内に書かれた見出しの構文 ``` = ``` は、
+// figcaption // (図の見出し)として出力されます。
+見出しの構文を書く位置は、 // figure // グループ内のどこでも良いです。
+しかしながら、一般には、 // figure // グループの一番上か一番下に書きます。
 
 {{figure
 = Input
+
 {{code :: karas
 {{figure
 = Caption text.
@@ -219,6 +238,7 @@ Contents in div group.
 
 {{figure
 = Output
+
 {{code :: html
 <figure>
 <figcaption>Caption text.</figcaption>
@@ -231,10 +251,12 @@ Contents in div group.
 }}
 
 // detalis // グループ内に書かれた見出しの構文 ``` = ``` は // summary // (要約)として出力されます。
-見出しの構文を書く位置は、 // details // グループ内のどこでもよいです。しかしながら、一般には、 // details // グループの一番上に書きます。
+見出しの構文を書く位置は、 // details // グループ内のどこでも良いです。
+しかしながら、一般には、 // details // グループの一番上に書きます。
 
 {{figure
 = Input
+
 {{code :: karas
 {{details
 = Summary text.
@@ -249,6 +271,7 @@ Contents in div group.
 
 {{figure
 = Output
+
 {{code :: html
 <details>
 <summary>Summary text.</summary>
@@ -268,10 +291,13 @@ Contents in div group.
 
 === // pre //, // code //, // kbd //, // samp // グループ :: precodekbdsamp
 
-// pre //, // code //, // kbd //, // samp // グループは、特別な機能を持つグループです。これらのグループ内にあるテキストは、改行するための構文 ``` ~ ``` を使わなくても、そのまま改行されます。また、テキストに含まれる KARAS の構文は変換されず、 // &lt; // や // &gt; // などの特定の文字は文字参照に変換されます。
+// pre //, // code //, // kbd //, // samp // グループは、特別な機能を持つグループです。
+これらのグループ内にあるテキストは、改行するための構文 ``` ~ ``` を使わなくても、そのまま改行されます。
+また、テキストに含まれる KARAS の構文は変換されず、 // &lt; // や // &gt; // などの特定の文字は文字参照に変換されます。
 
 {{figure
 = Input
+
 {{code :: karas
 {{pre
 Preformatted text.
@@ -283,6 +309,7 @@ Preformatted text.
 
 {{figure
 = Output
+
 {{code :: html
 <pre>
 Preformatted text.
@@ -292,10 +319,12 @@ Preformatted text.
 }}
 }}
 
-// code //, // kbd //, // samp // グループの出力は、 // pre // グループ(要素)が合わせて出力されます。オプションで追加したグループ名 (class名) は、 // pre // と // code // (// kbd //, // samp //) の両方に追加されます。
+// code //, // kbd //, // samp // グループの出力は、 // pre // グループ(要素)が合わせて出力されます。
+オプションで追加したグループ名 (class名) は、 // pre // と // code // (// kbd //, // samp //) の両方に追加されます。
 
 {{figure
 = Input
+
 {{code :: karas
 {{code :: lang-c
 int main()
@@ -314,6 +343,7 @@ Unyalder!
 
 {{figure
 = Output
+
 {{code :: html
 <pre class="lang-c">
 <code class="lang-c">
